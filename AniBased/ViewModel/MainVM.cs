@@ -14,14 +14,14 @@ namespace AniBased.ViewModel
 
         #region СВОЙСТВА VM
 
-        //private ImageVM _imageVM;
-        //public ImageVM ImageVM { get => _imageVM; set => Set(ref _imageVM, value); }
+        private EntryVM _entryVM;
+        public EntryVM EntryVM { get => _entryVM; set => Set(ref _entryVM, value); }
 
         #endregion
 
         public MainVM() 
         {
-
+            _entryVM = new EntryVM(this);
         } 
     }
 }
