@@ -9,7 +9,28 @@ namespace AniBased.ViewModel
 {
     internal class EntryVM : BaseVM
     {
-        private MainVM _mainVM;
+        #region ПОЛЯ
+
+        private readonly MainVM _mainVM;
+
+        #endregion
+
+        #region СВОЙСТВА
+        
+        private string _name;
+        public string Name;
+
+        #endregion
+
+        #region КОМАНДЫ
+
+
+        #endregion
+
+        #region МЕТОДЫ
+
+
+        #endregion
 
         public EntryVM(MainVM mainVM) 
         {

@@ -17,6 +17,8 @@ namespace AniBased.ViewModel
         private EntryVM _entryVM;
         public EntryVM EntryVM { get => _entryVM; set => Set(ref _entryVM, value); }
 
+
+
         #endregion
 
         public MainVM() 

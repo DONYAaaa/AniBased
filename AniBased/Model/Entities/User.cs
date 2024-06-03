@@ -9,12 +9,14 @@ namespace AniBased.Model.Entities
 {
     internal class User
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        private int Id { get; set; }
+        private string Name { get; set; }
+        private string Email { get; set; }
+        private string Password { get; set; }
 
-        public Library Library { get; set; }
+        private Library Library { get; set; }
+
+        private User() { }
 
 
         public class UserBuilder

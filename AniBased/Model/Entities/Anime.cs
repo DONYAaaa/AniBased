@@ -9,13 +9,13 @@ namespace AniBased.Model.Entities
 {
     internal class Anime
     {
-        public int Id { get; private set; }
+        public int Id { get; private set; } //TODO оставить ли ID?
         public string Name { get; private set; }
         public int ReleaseDate { get; private set; }
         public int NumberOfEpisodes { get; private set; }
         public List<Genre> Genres { get; private set; }
         public string Description { get; private set; }
-        public string LinkToView { get; private set; }
+        public string LinkToView { get; private set; } //TODO нужно ли открывать?
 
 
         public static AnimeBuilder Builder => new AnimeBuilder();

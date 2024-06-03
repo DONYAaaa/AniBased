@@ -15,7 +15,7 @@ namespace AniBased.Model.Entities.EntitiesOfGenre
             if (!IsGenreContains(genre)) { Genres.Add(genre); }
         }
 
-        public void RemoveAnime(Genre genre)
+        public void RemoveGenre(Genre genre)
         {
             if (IsGenreContains(genre)) { Genres.Remove(genre); }
         }

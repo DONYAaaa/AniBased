@@ -20,7 +20,8 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,38">
-                <PasswordBox Width="504" Height="52" Margin="5,0,5,0" Background="#415A77" Foreground="White"/>
+                <PasswordBox Width="504" Height="52" Margin="5,0,5,0" Background="#415A77" Foreground="White"
+                             IsHitTestVisible="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

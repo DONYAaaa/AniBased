@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AniBased.Model.Entities.EntitiesOfGenre
+namespace AniBased.Model.Entities.EntitiesOfStudio
 {
-    internal class Genre
+    class Studio
     {
         public string Name { get; }
         public string Description { get; }
 
-        public Genre(string name, string description)
+        public Studio(string name, string description)
         {
             Name = name;
             Description = description;
