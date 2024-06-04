@@ -28,6 +28,7 @@
                                          Padding="10"
                                          BorderBrush="Transparent"
                                          FontSize="22"
+                                         
                                          VerticalContentAlignment="Center"
                                          local:WatermarkService.Watermark="Введите пароль..."/>
                                 <TextBox x:Name="PART_TextBox"
@@ -38,7 +39,7 @@
                                      Foreground="White"
                                      BorderBrush="Transparent"
                                      FontSize="22"
-                                     Text="{Binding content}"
+                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Name}"
                                      VerticalContentAlignment="Center"
                                      Visibility="Collapsed"
                                      local:WatermarkService.Watermark="Введите пароль..."/>

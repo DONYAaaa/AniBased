@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using AniBased.View.Resource;
 
 namespace AniBased.ViewModel
 {
@@ -83,6 +84,29 @@ namespace AniBased.ViewModel
         }
 
         private bool CanTogglePasswordVisibility()
+        {
+            return true;
+        }
+
+        #endregion
+
+
+        #region Развернуть / скрыть пароль
+
+        public ICommand Entry
+        {
+            get => new RelayCommand((param) => OnEntry(param),
+                                    (_) => CanEntry());
+        }
+
+        private async void OnEntry(object parameter)
+        {
+            var values = (object[])parameter;
+            var password = values[0] as ContentControl;
+            _password = PasswordHelper.GetPassword(password);
+        }
+
+        private bool CanEntry()
         {
             return true;
         }
