@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="AniBased.View.Home.SearchStringView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AniBased.View.Home"
+             mc:Ignorable="d" xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+             Height="50" Width="Auto">
+    <Grid>
+        <Border Background="#2E3B4E"
+                            BorderBrush="Transparent"
+                            CornerRadius="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <fa:ImageAwesome Icon="Solid_MagnifyingGlass" HorizontalAlignment="Center" Grid.Column="0"
+                                     VerticalAlignment="Center" PrimaryColor="#778DA9" Margin="10"/>
+                <TextBox Padding="10" Grid.Column="1"
+                         Background="Transparent"
+                         Foreground="White"
+                         BorderBrush="Transparent"
+                         FontSize="22"
+                         Text="{Binding SearchMessage,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         Visibility="Visible"/>
+                
+                <Button Background="Transparent"
+                        Foreground="White"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="2"
+                        BorderThickness="0"
+                        Command="{Binding}">
+                    <fa:ImageAwesome Icon="Solid_Filter" HorizontalAlignment="Center"
+                                     VerticalAlignment="Center" PrimaryColor="#778DA9" Margin="10"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

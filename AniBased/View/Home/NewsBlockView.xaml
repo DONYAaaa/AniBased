@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="AniBased.View.Home.NewsBlockView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AniBased.View.Home"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\View\Resource\Style\EntryAndRegistryStyle.xaml"/>
+    </UserControl.Resources>
+    
+    <Border Background="#2E3B4E" CornerRadius="16">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer>
+                <DataGrid AutoGenerateColumns="False" Background="#2E3B4E">
+                    <DataGridComboBoxColumn Header="Фильтр" Width="70">
+                    </DataGridComboBoxColumn>
+                    <DataGridCheckBoxColumn Header="Применить" Width="70">
+                    </DataGridCheckBoxColumn>
+                </DataGrid>
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock HorizontalAlignment="Center" 
+                           Text="Жанр" Foreground="White"
+                           FontSize="18" Margin="5"/>
+                <ComboBox Margin="5"/>
+                <Button Style="{StaticResource StyledButton}" Content="Добавить жанр"
+                        Height="40" Width="100"
+                        Margin="10" Padding="10"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

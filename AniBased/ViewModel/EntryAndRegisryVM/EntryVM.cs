@@ -57,7 +57,7 @@ namespace AniBased.ViewModel
 
         #endregion
 
-        #region Развернуть / скрыть пароль
+        #region Войти
 
         public ICommand Entry
         {
@@ -67,7 +67,9 @@ namespace AniBased.ViewModel
 
         private async void OnEntry(object parameter)
         {
-            _password = _passwordVM.Password;
+            _mainVM.X = 0;
+            _mainVM.Y = 0;  
+            _mainVM.StartVM = _mainVM.HomeVM;
         }
 
         private bool CanEntry()

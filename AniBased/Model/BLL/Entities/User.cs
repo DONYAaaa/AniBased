@@ -1,11 +1,10 @@
-﻿using AniBased.Model.Entities.EntitiesOfLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AniBased.Model.Entities
+namespace AniBased.Model.BLL.Entities
 {
     internal class User
     {
@@ -25,12 +24,12 @@ namespace AniBased.Model.Entities
 
             public UserBuilder()
             {
-                this.user = new();
+                user = new();
                 user.Library = new();
             }
 
-            public NameUserBuilder AddId (int Id) 
-            { 
+            public NameUserBuilder AddId(int Id)
+            {
                 user.Id = Id;
                 return new NameUserBuilder(user);
             }
@@ -39,14 +38,14 @@ namespace AniBased.Model.Entities
             {
                 public User user;
 
-                public NameUserBuilder (User user) 
+                public NameUserBuilder(User user)
                 {
                     this.user = user;
                 }
 
-                public EmailUserBuilder AddName(string name) 
+                public EmailUserBuilder AddName(string name)
                 {
-                    this.user.Name = name;
+                    user.Name = name;
                     return new EmailUserBuilder(user);
                 }
 
@@ -56,7 +55,7 @@ namespace AniBased.Model.Entities
 
                     public EmailUserBuilder(User user)
                     {
-                        this.user = user; 
+                        this.user = user;
                     }
 
                     public PasswordUserBuilder AddEmail(string email)
@@ -80,7 +79,7 @@ namespace AniBased.Model.Entities
                             return this;
                         }
 
-                        public User Build() {return this.user;}
+                        public User Build() { return user; }
                     }
                 }
             }

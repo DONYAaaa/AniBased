@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AniBased.Model.Entities.EntitiesOfGenre;
 
-namespace AniBased.Model.Entities
+namespace AniBased.Model.BLL.Entities
 {
     internal class Filter
     {

@@ -1,9 +1,12 @@
 ﻿using AniBased.ViewModel.Base;
+using AniBased.ViewModel.Home;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Media3D;
 
@@ -13,6 +16,12 @@ namespace AniBased.ViewModel
     {
 
         #region СВОЙСТВА VM
+
+        private double _x;
+        public double X { get => _x; set => Set(ref _x, value); }
+
+        private double _y;
+        public double Y { get => _y; set => Set(ref _y, value); }
 
         private BaseVM _startVM;
         public BaseVM StartVM { get => _startVM; set => Set(ref _startVM, value); }
@@ -26,6 +35,20 @@ namespace AniBased.ViewModel
         private ToolBarVM _toolBarVM;
         public ToolBarVM ToolBarVM { get => _toolBarVM; set => Set(ref _toolBarVM, value); }
 
+        private HomeVM _homeVM;
+        public HomeVM HomeVM { get => _homeVM; set => Set(ref _homeVM, value); }
+
+        private SearchStringVM _searchStringVM;
+        public SearchStringVM SearchStringVM { get => _searchStringVM; set => Set(ref _searchStringVM, value); }
+
+        private WindowAnimesVM _windowAnimesVM;
+        public WindowAnimesVM WindowAnimesVM { get => _windowAnimesVM; set => Set(ref _windowAnimesVM, value); }
+
+        private NavigationCommandVM _navigationCommandVM;
+        public NavigationCommandVM NavigationCommandVM { get => _navigationCommandVM; set => Set(ref _navigationCommandVM, value); }
+
+        private NewsBlockVM _newsBlockVM;
+        public NewsBlockVM NewsBlockVM { get => _newsBlockVM; set => Set(ref _newsBlockVM, value); }
         #endregion
 
         public MainVM() 
@@ -34,6 +57,11 @@ namespace AniBased.ViewModel
             _entryVM = (EntryVM)_startVM;
             _registryVM = new RegistryVM(this);
             _toolBarVM = new ToolBarVM(this);
+            _navigationCommandVM = new NavigationCommandVM(this);
+            _searchStringVM = new SearchStringVM(this);
+            _windowAnimesVM = new WindowAnimesVM(this);
+            _newsBlockVM = new NewsBlockVM(this);
+            _homeVM = new HomeVM(this);
         } 
     }
 }

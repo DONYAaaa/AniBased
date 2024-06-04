@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AniBased"
         xmlns:views ="clr-namespace:AniBased.View"
+        xmlns:viewsHome ="clr-namespace:AniBased.View.Home"
         xmlns:vm ="clr-namespace:AniBased.ViewModel"
+        xmlns:vmHome ="clr-namespace:AniBased.ViewModel.Home"
         mc:Ignorable="d"
         Title="MainWindow" SizeToContent="WidthAndHeight" 
         Height="auto" Width="auto" Background="#0D1B2A"
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Top="{Binding X, Mode=TwoWay}" Left="{Binding Y, Mode=TwoWay}"
+        WindowStyle="SingleBorderWindow">
+    
+
+    
     <Window.Resources>
 
         <DataTemplate DataType="{x:Type vm:EntryVM}">
@@ -28,11 +35,34 @@
             <views:ToolBarView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:HomeVM}">
+            <views:HomeView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmHome:SearchStringVM}">
+            <viewsHome:SearchStringView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmHome:NavigationCommandVM}">
+            <viewsHome:NavigationCommandView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmHome:NewsBlockVM}">
+            <viewsHome:NewsBlockView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmHome:WindowAnimesVM}">
+            <viewsHome:WindowAnimesView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmHome:PosterVM}">
+            <viewsHome:Poster/>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
         <StackPanel Background="#0D1B2A">
-            <ContentControl Content="{Binding ToolBarVM}"/>
+            <!--<ContentControl Content="{Binding ToolBarVM}"/>-->
             <ContentControl Content="{Binding StartVM}"/>
         </StackPanel>
     </Grid>
