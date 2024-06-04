@@ -25,6 +25,11 @@ namespace AniBased.ViewModel
         private string _name;
         public string Name { get => _name; set => Set(ref _name, value); }
 
+
+        private string _password;
+        public string Password { get => _password; set => Set(ref _password, value); }
+
+
         #endregion
 
         #region КОМАНДЫ

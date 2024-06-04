@@ -24,14 +24,15 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,26">
                 <TextBox Width="504" Height="52" Margin="5,0,5,0"
                          FontSize="22"
+                         Text="{Binding Name}"
                          Style="{StaticResource StyledTextBox}"
                 localServices:WatermarkService.Watermark="Введите логин..."/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,38">
                 <ContentControl Margin="5,0,5,0" 
-                                Style="{StaticResource PasswordBoxWithButtonStyle}"  
-                                />
+                                Style="{StaticResource PasswordBoxWithButtonStyle}">
+                </ContentControl>
 
             </StackPanel>
 

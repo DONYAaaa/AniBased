@@ -10,6 +10,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Content" x:Name="content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Name}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
@@ -37,6 +38,7 @@
                                      Foreground="White"
                                      BorderBrush="Transparent"
                                      FontSize="22"
+                                     Text="{Binding content}"
                                      VerticalContentAlignment="Center"
                                      Visibility="Collapsed"
                                      local:WatermarkService.Watermark="Введите пароль..."/>
@@ -63,12 +65,12 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="PART_PasswordBox" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="PART_TextBox" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
                             <Setter TargetName="PART_PasswordBox" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="PART_TextBox" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter TargetName="PART_PasswordBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_TextBox" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
