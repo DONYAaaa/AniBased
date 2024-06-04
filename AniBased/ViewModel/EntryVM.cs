@@ -3,8 +3,11 @@ using AniBased.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AniBased.ViewModel
@@ -26,7 +29,7 @@ namespace AniBased.ViewModel
 
         #region КОМАНДЫ
 
-        #region СДЕЛАТЬ ФОТО
+        #region Открыть окно регистрации
 
         public ICommand OpenRegistry
         {
@@ -40,6 +43,41 @@ namespace AniBased.ViewModel
         }
 
         private bool CanOpenRegistyWindow()
+        {
+            return true;
+        }
+
+        #endregion
+
+        #region Развернуть / скрыть пароль
+
+        public ICommand TogglePasswordVisibilityCommand
+        {
+            get => new RelayCommand((param) => TogglePasswordVisibility(param),
+                                    (_) => CanOpenRegistyWindow());
+        }
+
+        private async void TogglePasswordVisibility(object parameter)
+        {
+            var values = (object[])parameter;
+            var passwordBox = values[0] as PasswordBox;
+            var textBox = values[1] as TextBox;
+
+            if (passwordBox.Visibility == Visibility.Visible)
+            {
+                textBox.Text = passwordBox.Password;
+                passwordBox.Visibility = Visibility.Collapsed;
+                textBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                passwordBox.Password = textBox.Text;
+                textBox.Visibility = Visibility.Collapsed;
+                passwordBox.Visibility = Visibility.Visible;
+            }
+        }
+
+        private bool CanTogglePasswordVisibility()
         {
             return true;
         }

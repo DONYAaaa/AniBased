@@ -6,10 +6,16 @@
              xmlns:local="clr-namespace:AniBased.View"
              mc:Ignorable="d" 
              Height="570" Width="600" Background="#0D1B2A">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\View\Resource\Style\EntryAndRegistryStyle.xaml"/>
+    </UserControl.Resources>
+
     <Grid Margin="48,30,48,30">
 
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -18,11 +24,14 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Регистрация" 
+        <Button HorizontalAlignment="Left" Width="40" 
+                Style="{StaticResource BackButtonStyle}"/>
+
+        <TextBlock Grid.Row="1" Text="Регистрация" 
                    Foreground="#778DA9" FontSize="24" 
                    HorizontalAlignment="Center"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.Row="2" Grid.Column="0">
             <TextBlock Text="Nicname"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
@@ -31,7 +40,7 @@
                      FontSize="16"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0">
+        <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock Text="Mail"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
@@ -40,7 +49,7 @@
                      FontSize="16"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="0">
+        <StackPanel Grid.Row="4" Grid.Column="0">
             <TextBlock Text="Password"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
@@ -49,7 +58,7 @@
                      FontSize="16"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="0">
+        <StackPanel Grid.Row="5" Grid.Column="0">
             <TextBlock Text="Confirm Password"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
@@ -58,7 +67,7 @@
                      FontSize="16"/>
         </StackPanel>
 
-        <Button Grid.Row="5" 
+        <Button Grid.Row="6" 
                 Content="Зарегистрироваться" FontSize="16" 
                 Width="216" Height="39" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 

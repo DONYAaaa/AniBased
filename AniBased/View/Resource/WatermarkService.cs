@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace AniBased.View.Resource
 {
@@ -26,19 +27,28 @@ namespace AniBased.View.Resource
 
         private static void OnWatermarkChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TextBox textBox)
+            if (d is Control control)
             {
-                if ((string)e.NewValue != null)
+                control.Loaded += Control_Loaded;
+                if (control is TextBox textBox)
                 {
                     textBox.GotFocus += RemoveWatermark;
                     textBox.LostFocus += ShowWatermark;
-                    ShowWatermark(textBox, null);
                 }
-                else
+                else if (control is PasswordBox passwordBox)
                 {
-                    textBox.GotFocus -= RemoveWatermark;
-                    textBox.LostFocus -= ShowWatermark;
+                    passwordBox.PasswordChanged += (sender, args) => ShowWatermark(passwordBox);
                 }
+
+                ShowWatermark(control);
+            }
+        }
+
+        private static void Control_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is Control control)
+            {
+                ShowWatermark(control);
             }
         }
 
@@ -53,10 +63,57 @@ namespace AniBased.View.Resource
 
         private static void ShowWatermark(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
+            if (sender is Control control)
+            {
+                ShowWatermark(control);
+            }
+        }
+
+        private static void ShowWatermark(Control control)
+        {
+            if (control is TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Text = GetWatermark(textBox);
                 textBox.Foreground = new SolidColorBrush(Colors.Gray); // Цвет placeholder
+            }
+            else if (control is PasswordBox passwordBox)
+            {
+                if (string.IsNullOrEmpty(passwordBox.Password))
+                {
+                    AddWatermark(passwordBox);
+                }
+                else
+                {
+                    RemoveWatermark(passwordBox);
+                }
+            }
+        }
+
+        private static void AddWatermark(Control control)
+        {
+            var adornerLayer = AdornerLayer.GetAdornerLayer(control);
+            if (adornerLayer != null)
+            {
+                adornerLayer.Add(new WatermarkAdorner(control, GetWatermark(control)));
+            }
+        }
+
+        private static void RemoveWatermark(Control control)
+        {
+            var adornerLayer = AdornerLayer.GetAdornerLayer(control);
+            if (adornerLayer != null)
+            {
+                var adorners = adornerLayer.GetAdorners(control);
+                if (adorners != null)
+                {
+                    foreach (var adorner in adorners)
+                    {
+                        if (adorner is WatermarkAdorner)
+                        {
+                            adornerLayer.Remove(adorner);
+                        }
+                    }
+                }
             }
         }
     }

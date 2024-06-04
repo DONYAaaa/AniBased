@@ -7,6 +7,11 @@
              xmlns:localServices="clr-namespace:AniBased.View.Resource"
              mc:Ignorable="d" 
              Height="350" Width="600">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\View\Resource\Style\EntryAndRegistryStyle.xaml"/>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="#0D1B2A"/>
@@ -24,12 +29,10 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,38">
-                <PasswordBox x:Name="PasswordBox" Width="504" Height="52"
-                             Margin="5,0,5,0" Background="#415A77"
-                             Foreground="White" VerticalContentAlignment="Center"
-                             FontSize="22"/>
-                <Button Content="👁" Width="52" Height="52" Background="#2E3B4E"
-                        Foreground="White" FontSize="22" Margin="5,0,5,0"/>
+                <ContentControl Margin="5,0,5,0" 
+                                Style="{StaticResource PasswordBoxWithButtonStyle}"  
+                                />
+
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
