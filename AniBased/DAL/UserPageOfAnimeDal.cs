@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AniBased.DAL
 {
-    internal class UserPageOfAnimeDal
+    internal class UserPageOfAnimeDAL
     {
+        public int UserId { get; set; }
+        public int PageOfAnimeId { get; set; }
+        public int Id { get; set; }
     }
 }

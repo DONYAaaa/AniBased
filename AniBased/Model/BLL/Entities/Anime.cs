@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Drawing;
 
 namespace AniBased.Model.BLL.Entities
 {
@@ -17,6 +17,7 @@ namespace AniBased.Model.BLL.Entities
         public string Description { get; private set; }
         public string LinkToView { get; private set; }
         public string Dubbing { get; private set; }
+        public Studio Studio { get; private set; }
         public int AgeRestriction { get; private set; }
         public Image Image { get; private set; }
 
@@ -96,6 +97,12 @@ namespace AniBased.Model.BLL.Entities
                     public virtual FinalAnimeBuilder AddImage(Image image)
                     {
                         anime.Image = image;
+                        return this;
+                    }
+
+                    public virtual FinalAnimeBuilder AddStudio(Studio studio)
+                    {
+                        anime.Studio = studio;
                         return this;
                     }
 

@@ -12,6 +12,7 @@ namespace AniBased.Model.BLL.Entities
         public PageOfAnime Viewed { get; set; }
         public PageOfAnime Watching { get; set; }
         public PageOfAnime History { get; private set; }
+        public PageOfAnime Planned { get; private set; }
 
         public List<PageOfAnime> Anime { get; set; }
 
@@ -21,6 +22,7 @@ namespace AniBased.Model.BLL.Entities
             Viewed = new PageOfAnime();
             Watching = new PageOfAnime();
             History = new PageOfAnime();
+            Planned = new PageOfAnime();
         }
     }
 }
