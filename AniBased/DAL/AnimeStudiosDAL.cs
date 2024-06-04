@@ -8,5 +8,8 @@ namespace AniBased.DAL
 {
     internal class AnimeStudiosDAL
     {
+        public int Id { get; set; }
+        public int AnimesId { get; set; }
+        public int StudioId { get; set; }
     }
 }

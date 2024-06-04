@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.DAL
 {
-    internal class StudioDAL
+    internal class UsersStatisticalInformationOfSeriesDAL
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 }

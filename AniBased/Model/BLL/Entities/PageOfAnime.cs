@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AniBased.Model.Entities.EntitiesOfLibrary
+namespace AniBased.Model.BLL.Entities
 {
     internal class PageOfAnime
     {
@@ -28,7 +28,7 @@ namespace AniBased.Model.Entities.EntitiesOfLibrary
         private bool IsAnimeContains(Anime anime)
         {
             if (IsAnimeNotNull(anime))
-            if (Animes.Contains(anime)) return true; else return false;
+                if (Animes.Contains(anime)) return true; else return false;
             else throw new ArgumentNullException();
         }
     }

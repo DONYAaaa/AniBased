@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AniBased.Model.Entities.EntitiesOfStudio
+namespace AniBased.Model.BLL.Entities
 {
     class Studio
     {

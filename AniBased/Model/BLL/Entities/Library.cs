@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AniBased.Model.Entities.EntitiesOfLibrary
+namespace AniBased.Model.BLL.Entities
 {
     internal class Library
     {
@@ -15,7 +15,7 @@ namespace AniBased.Model.Entities.EntitiesOfLibrary
 
         public List<PageOfAnime> Anime { get; set; }
 
-        public Library() 
+        public Library()
         {
             Favorites = new PageOfAnime();
             Viewed = new PageOfAnime();

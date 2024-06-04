@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace AniBased.Model.BLL.Entities
 {
     internal class Anime
     {
-        public int Id { get; private set; } //TODO оставить ли ID?
+        public int Id { get; private set; }
         public string Name { get; private set; }
         public int ReleaseDate { get; private set; }
         public int NumberOfEpisodes { get; private set; }
         public List<Genre> Genres { get; private set; }
         public string Description { get; private set; }
-        public string LinkToView { get; private set; } //TODO нужно ли открывать?
+        public string LinkToView { get; private set; }
+        public string Dubbing { get; private set; }
+        public int AgeRestriction { get; private set; }
+        public Image Image { get; private set; }
 
 
         public static AnimeBuilder Builder => new AnimeBuilder();
@@ -77,15 +81,33 @@ namespace AniBased.Model.BLL.Entities
                         return this;
                     }
 
+                    public FinalAnimeBuilder AddAgeRestriction(int AgeRestriction)
+                    {
+                        anime.AgeRestriction = AgeRestriction;
+                        return this;
+                    }
+
                     public virtual FinalAnimeBuilder AddGenre(Genre Ganre)
                     {
                         anime.Genres.Add(Ganre);
                         return this;
                     }
 
+                    public virtual FinalAnimeBuilder AddImage(Image image)
+                    {
+                        anime.Image = image;
+                        return this;
+                    }
+
                     public FinalAnimeBuilder AddDescription(string Description)
                     {
                         anime.Description = Description;
+                        return this;
+                    }
+
+                    public FinalAnimeBuilder AddDubbing(string Dubbing)
+                    {
+                        anime.Dubbing = Dubbing;
                         return this;
                     }
 

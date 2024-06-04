@@ -8,5 +8,8 @@ namespace AniBased.DAL
 {
     internal class GenreDAL
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
