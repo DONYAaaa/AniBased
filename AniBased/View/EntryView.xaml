@@ -30,12 +30,8 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,38">
-                <ContentControl Margin="5,0,5,0"
-                                Name="Pass"
-                                Style="{StaticResource PasswordBoxWithButtonStyle}"
-                                Content="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
-                </ContentControl>
-
+                <ContentControl Content="{Binding PasswordVM}"
+                Margin="5"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -43,12 +39,6 @@
                         FontSize="16" Margin="0,0,15,0" 
                         Style="{StaticResource StyledButton}"
                         Command="{Binding DataContext.Entry, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ArrayConverter}">
-                            <Binding ElementName="Pass"/>
-                            <Binding ElementName="Pass"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
                 </Button>
                 <Button Content="Зарегистрироваться" Width="216"
                         FontSize="16" Height="39" Margin="15,0,0,0"

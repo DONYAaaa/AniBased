@@ -22,7 +22,9 @@ namespace AniBased.ViewModel
         #endregion
 
         #region СВОЙСТВА
-        
+        private PasswordVM _passwordVM;
+        public PasswordVM PasswordVM { get=> _passwordVM; set => Set(ref _passwordVM, value); }
+
         private string _name;
         public string Name { get => _name; set => Set(ref _name, value); }
 
@@ -57,42 +59,6 @@ namespace AniBased.ViewModel
 
         #region Развернуть / скрыть пароль
 
-        public ICommand TogglePasswordVisibilityCommand
-        {
-            get => new RelayCommand((param) => TogglePasswordVisibility(param),
-                                    (_) => CanTogglePasswordVisibility());
-        }
-
-        private async void TogglePasswordVisibility(object parameter)
-        {
-            var values = (object[])parameter;
-            var passwordBox = values[0] as PasswordBox;
-            var textBox = values[1] as TextBox;
-
-            if (passwordBox.Visibility == Visibility.Visible)
-            {
-                textBox.Text = passwordBox.Password;
-                passwordBox.Visibility = Visibility.Collapsed;
-                textBox.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                passwordBox.Password = textBox.Text;
-                textBox.Visibility = Visibility.Collapsed;
-                passwordBox.Visibility = Visibility.Visible;
-            }
-        }
-
-        private bool CanTogglePasswordVisibility()
-        {
-            return true;
-        }
-
-        #endregion
-
-
-        #region Развернуть / скрыть пароль
-
         public ICommand Entry
         {
             get => new RelayCommand((param) => OnEntry(param),
@@ -101,9 +67,7 @@ namespace AniBased.ViewModel
 
         private async void OnEntry(object parameter)
         {
-            var values = (object[])parameter;
-            var password = values[0] as ContentControl;
-            _password = PasswordHelper.GetPassword(password);
+            _password = _passwordVM.Password;
         }
 
         private bool CanEntry()
@@ -123,6 +87,7 @@ namespace AniBased.ViewModel
         public EntryVM(MainVM mainVM) 
         {
             _mainVM = mainVM;
+            _passwordVM = new PasswordVM(_mainVM);
         }
     }
 }

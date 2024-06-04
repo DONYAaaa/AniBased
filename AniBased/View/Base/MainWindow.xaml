@@ -19,6 +19,10 @@
         <DataTemplate DataType="{x:Type vm:RegistryVM}">
             <views:Registry/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:PasswordVM}">
+            <views:PasswordView/>
+        </DataTemplate>
         
     </Window.Resources>
 

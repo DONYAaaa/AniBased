@@ -46,7 +46,7 @@
         <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock Text="Mail"  
                    Foreground="#778DA9" FontSize="14" 
-                   HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                   HorizontalAlignment="Left" Margin="6,0,0,0"/>
             <TextBox Width="504" Height="52" 
                      FontSize="22"
                      Style="{StaticResource StyledTextBox}" 
@@ -56,17 +56,15 @@
         <StackPanel Grid.Row="4" Grid.Column="0">
             <TextBlock Text="Password"  
                    Foreground="#778DA9" FontSize="14" 
-                   HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <ContentControl 
-                Style="{StaticResource PasswordBoxWithButtonStyle}" />
+                   HorizontalAlignment="Left" Margin="6,0,0,0"/>
+            <ContentControl Content="{Binding PasswordVM}" />
         </StackPanel>
 
         <StackPanel Grid.Row="5" Grid.Column="0">
             <TextBlock Text="Confirm Password"  
                    Foreground="#778DA9" FontSize="14" 
-                   HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <ContentControl 
-                Style="{StaticResource PasswordBoxWithButtonStyle}" />
+                   HorizontalAlignment="Left" Margin="6,0,0,0"/>
+            <ContentControl Content="{Binding PasswordConfirmVM}" />
         </StackPanel>
 
         <Button Grid.Row="6" 

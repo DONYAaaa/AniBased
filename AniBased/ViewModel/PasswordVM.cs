@@ -1,4 +1,5 @@
 ﻿using AniBased.Infastructure.Command;
+using AniBased.View.Resource;
 using AniBased.ViewModel.Base;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
+using System.Windows;
 
 namespace AniBased.ViewModel
 {
-    internal class RegistryVM : BaseVM
+    internal class PasswordVM : BaseVM
     {
         #region ПОЛЯ
 
@@ -21,43 +22,12 @@ namespace AniBased.ViewModel
 
         #region СВОЙСТВА
 
-        private string _name;
-        public string Name { get => _name; set => Set(ref _name, value); }
-
-        private PasswordVM _passwordVM;
-        public PasswordVM PasswordVM { get => _passwordVM; set => Set(ref _passwordVM, value); }
-
-        private PasswordVM _passwordConfirmVM;
-        public PasswordVM PasswordConfirmVM { get => _passwordConfirmVM; set => Set(ref _passwordConfirmVM, value); }
+        private string _password;
+        public string Password { get; set; }
 
         #endregion
 
         #region КОМАНДЫ
-
-
-        #endregion
-
-        #region МЕТОДЫ
-
-        #region Открыть окно входа
-
-        public ICommand OpenEntry
-        {
-            get => new RelayCommand((_) => OpenEntryWindow(),
-                                    (_) => CanOpenEntryWindow());
-        }
-
-        private async void OpenEntryWindow()
-        {
-            _mainVM.StartVM = _mainVM.EntryVM;
-        }
-
-        private bool CanOpenEntryWindow()
-        {
-            return true;
-        }
-
-        #endregion
 
         #region Развернуть / скрыть пароль
 
@@ -96,11 +66,14 @@ namespace AniBased.ViewModel
 
         #endregion
 
-        public RegistryVM(MainVM mainVM)
+        #region МЕТОДЫ
+
+
+        #endregion
+
+        public PasswordVM(MainVM mainVM)
         {
             _mainVM = mainVM;
-            _passwordVM = new PasswordVM(_mainVM);
-            _passwordConfirmVM = new PasswordVM(_mainVM);
         }
     }
 }
