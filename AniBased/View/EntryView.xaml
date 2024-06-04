@@ -4,29 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AniBased.View"
+             xmlns:localServices="clr-namespace:AniBased.View.Resource"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="600">
+             Height="350" Width="600">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="#0D1B2A"/>
         </Grid.Background>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="AniBASED" FontSize="32" Foreground="#778DA9" HorizontalAlignment="Center" Margin="0,0,0,47"/>
+            <TextBlock Text="AniBASED" FontSize="32" Foreground="#778DA9"
+                       HorizontalAlignment="Center" Margin="0,0,0,47"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,26">
-                <TextBox Width="504" Height="52" Margin="5,0,5,0" Background="#415A77" Foreground="White" 
-                         Text="Введите логин..." FontSize="22" VerticalContentAlignment="Center"/>
+                <TextBox Width="504" Height="52" Margin="5,0,5,0"
+                         Background="#415A77" Foreground="White"
+                         FontSize="22" VerticalContentAlignment="Center"
+                localServices:WatermarkService.Watermark="Введите логин..."/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,38">
-                <PasswordBox Width="504" Height="52" Margin="5,0,5,0" Background="#415A77" Foreground="White"
-                             IsHitTestVisible="True"/>
+                <PasswordBox x:Name="PasswordBox" Width="504" Height="52"
+                             Margin="5,0,5,0" Background="#415A77"
+                             Foreground="White" VerticalContentAlignment="Center"
+                             FontSize="22"/>
+                <Button Content="👁" Width="52" Height="52" Background="#2E3B4E"
+                        Foreground="White" FontSize="22" Margin="5,0,5,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Войти" Width="216" Height="39" FontSize="16" Margin="0,0,15,0" Background="#2E3B4E" Foreground="White"/>
-                <Button Content="Зарегистрироваться" Width="216" FontSize="16" Height="39" Margin="15,0,0,0" Background="#2E3B4E" Foreground="White"/>
+                <Button Content="Войти" Width="216" Height="39"
+                        FontSize="16" Margin="0,0,15,0" Background="#2E3B4E"
+                        Foreground="White"/>
+                <Button Content="Зарегистрироваться" Width="216"
+                        FontSize="16" Height="39" Margin="15,0,0,0"
+                        Background="#2E3B4E" Foreground="White"
+                        Command="{Binding OpenRegistry}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

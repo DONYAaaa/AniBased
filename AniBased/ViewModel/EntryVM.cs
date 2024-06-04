@@ -1,9 +1,11 @@
-﻿using AniBased.ViewModel.Base;
+﻿using AniBased.Infastructure.Command;
+using AniBased.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AniBased.ViewModel
 {
@@ -18,12 +20,31 @@ namespace AniBased.ViewModel
         #region СВОЙСТВА
         
         private string _name;
-        public string Name;
+        public string Name { get => _name; set => Set(ref _name, value); }
 
         #endregion
 
         #region КОМАНДЫ
 
+        #region СДЕЛАТЬ ФОТО
+
+        public ICommand OpenRegistry
+        {
+            get => new RelayCommand((_) => OpenRegistyWindow(),
+                                    (_) => CanOpenRegistyWindow());
+        }
+
+        private async void OpenRegistyWindow()
+        {
+            _mainVM.StartVM = new RegistryVM(_mainVM);
+        }
+
+        private bool CanOpenRegistyWindow()
+        {
+            return true;
+        }
+
+        #endregion
 
         #endregion
 

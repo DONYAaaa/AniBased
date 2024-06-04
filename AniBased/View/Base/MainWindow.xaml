@@ -7,16 +7,22 @@
         xmlns:views ="clr-namespace:AniBased.View"
         xmlns:vm ="clr-namespace:AniBased.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" SizeToContent="WidthAndHeight" 
+        Height="auto" Width="auto"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
         <DataTemplate DataType="{x:Type vm:EntryVM}">
             <views:Entry/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:RegistryVM}">
+            <views:Registry/>
+        </DataTemplate>
         
     </Window.Resources>
 
     <Grid>
-        <ContentControl Content="{Binding EntryVM}"/>
+        <ContentControl Content="{Binding StartVM}"/>
     </Grid>
 </Window>

@@ -14,8 +14,8 @@ namespace AniBased.ViewModel
 
         #region СВОЙСТВА VM
 
-        private EntryVM _entryVM;
-        public EntryVM EntryVM { get => _entryVM; set => Set(ref _entryVM, value); }
+        private BaseVM _startVM;
+        public BaseVM StartVM { get => _startVM; set => Set(ref _startVM, value); }
 
 
 
@@ -23,7 +23,7 @@ namespace AniBased.ViewModel
 
         public MainVM() 
         {
-            _entryVM = new EntryVM(this);
+            _startVM = new EntryVM(this);
         } 
     }
 }
