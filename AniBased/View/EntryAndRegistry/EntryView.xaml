@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AniBased.View"
              xmlns:localServices="clr-namespace:AniBased.View.Resource"
              mc:Ignorable="d" 
-             Height="350" Width="600">
+             Height="350" Width="600" Background="#0D1B2A">
 
     <UserControl.Resources>
         <ResourceDictionary Source="\View\Resource\Style\EntryAndRegistryStyle.xaml"/>
@@ -18,7 +18,7 @@
         </Grid.Background>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="AniBASED" FontSize="32" Foreground="#778DA9"
+            <TextBlock Text="Авторизация" FontSize="32" Foreground="#778DA9"
                        HorizontalAlignment="Center" Margin="0,0,0,47"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,26">

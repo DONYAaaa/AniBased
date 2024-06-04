@@ -23,6 +23,9 @@ namespace AniBased.ViewModel
         private RegistryVM _registryVM;
         public RegistryVM RegistryVM { get => _registryVM; set => Set(ref _registryVM, value); }
 
+        private ToolBarVM _toolBarVM;
+        public ToolBarVM ToolBarVM { get => _toolBarVM; set => Set(ref _toolBarVM, value); }
+
         #endregion
 
         public MainVM() 
@@ -30,6 +33,7 @@ namespace AniBased.ViewModel
             _startVM = new EntryVM(this);
             _entryVM = (EntryVM)_startVM;
             _registryVM = new RegistryVM(this);
+            _toolBarVM = new ToolBarVM(this);
         } 
     }
 }

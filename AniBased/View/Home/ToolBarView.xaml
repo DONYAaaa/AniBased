@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="AniBased.View.ToolBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AniBased.View"
+             mc:Ignorable="d" xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+             d:DesignHeight="60" Width="Auto">
+    <Grid>
+        <Border Background="#2E3B4E" BorderBrush="#778DA9" ClipToBounds="True" 
+                CornerRadius="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="AniBASED" FontSize="32"
+                           Foreground="#778DA9" VerticalAlignment="Center"/>
+
+                <Button Grid.Column="3" Margin="10,5,10,5"
+                        MaxHeight="30" MaxWidth="30" Command="{Binding CloseWindowCommand}"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <fa:ImageAwesome Icon="Regular_WindowMinimize" HorizontalAlignment="Center"
+                                     VerticalAlignment="Bottom" PrimaryColor="#778DA9" Margin="0"/>
+                </Button>
+
+                <Button Grid.Column="4" Margin="10,5,10,5" 
+                        MaxHeight="30" MaxWidth="30" Command="{Binding CloseWindowCommand}"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <fa:ImageAwesome Icon="Regular_WindowMaximize" HorizontalAlignment="Center" PrimaryColor="#778DA9" Margin="0"/>
+                </Button>
+
+                <Button Grid.Column="5" Margin="10,5,10,5"
+                        MaxHeight="30" MaxWidth="30" Command="{Binding CloseWindowCommand}"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <fa:ImageAwesome Icon="Solid_Xmark" HorizontalAlignment="Center" PrimaryColor="#778DA9" Margin="0"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
