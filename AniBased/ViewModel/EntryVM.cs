@@ -39,7 +39,7 @@ namespace AniBased.ViewModel
 
         private async void OpenRegistyWindow()
         {
-            _mainVM.StartVM = new RegistryVM(_mainVM);
+            _mainVM.StartVM = _mainVM.RegistryVM;
         }
 
         private bool CanOpenRegistyWindow()
@@ -54,7 +54,7 @@ namespace AniBased.ViewModel
         public ICommand TogglePasswordVisibilityCommand
         {
             get => new RelayCommand((param) => TogglePasswordVisibility(param),
-                                    (_) => CanOpenRegistyWindow());
+                                    (_) => CanTogglePasswordVisibility());
         }
 
         private async void TogglePasswordVisibility(object parameter)

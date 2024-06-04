@@ -17,13 +17,19 @@ namespace AniBased.ViewModel
         private BaseVM _startVM;
         public BaseVM StartVM { get => _startVM; set => Set(ref _startVM, value); }
 
+        private EntryVM _entryVM;
+        public EntryVM EntryVM { get => _entryVM; set => Set(ref _entryVM, value); }
 
+        private RegistryVM _registryVM;
+        public RegistryVM RegistryVM { get => _registryVM; set => Set(ref _registryVM, value); }
 
         #endregion
 
         public MainVM() 
         {
             _startVM = new EntryVM(this);
+            _entryVM = (EntryVM)_startVM;
+            _registryVM = new RegistryVM(this);
         } 
     }
 }

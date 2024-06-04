@@ -5,17 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AniBased.View"
              mc:Ignorable="d" 
+             xmlns:localServices="clr-namespace:AniBased.View.Resource"
              Height="570" Width="600" Background="#0D1B2A">
 
     <UserControl.Resources>
         <ResourceDictionary Source="\View\Resource\Style\EntryAndRegistryStyle.xaml"/>
     </UserControl.Resources>
 
-    <Grid Margin="48,30,48,30">
+    <Grid Margin="48,20,48,30">
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.6*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -24,7 +25,8 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Button HorizontalAlignment="Left" Width="40" 
+        <Button HorizontalAlignment="Left" Width="40" Height="22"
+                Command="{Binding OpenEntry}"
                 Style="{StaticResource BackButtonStyle}"/>
 
         <TextBlock Grid.Row="1" Text="Регистрация" 
@@ -34,10 +36,11 @@
         <StackPanel Grid.Row="2" Grid.Column="0">
             <TextBlock Text="Nicname"  
                    Foreground="#778DA9" FontSize="14" 
-                   HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                   HorizontalAlignment="Left" Margin="6,0,0,0"/>
             <TextBox Width="504" Height="52" 
-                     HorizontalAlignment="Left" VerticalAlignment="Center" 
-                     FontSize="16"/>
+                     FontSize="22"
+                     Style="{StaticResource StyledTextBox}" 
+                     localServices:WatermarkService.Watermark="Введите логин..."/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
@@ -45,32 +48,31 @@
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
             <TextBox Width="504" Height="52" 
-                     HorizontalAlignment="Left" VerticalAlignment="Center" 
-                     FontSize="16"/>
+                     FontSize="22"
+                     Style="{StaticResource StyledTextBox}" 
+                     localServices:WatermarkService.Watermark="Введите почту..."/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="0">
             <TextBlock Text="Password"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <PasswordBox Width="504" Height="52" 
-                     HorizontalAlignment="Left" VerticalAlignment="Center" 
-                     FontSize="16"/>
+            <ContentControl 
+                Style="{StaticResource PasswordBoxWithButtonStyle}" />
         </StackPanel>
 
         <StackPanel Grid.Row="5" Grid.Column="0">
             <TextBlock Text="Confirm Password"  
                    Foreground="#778DA9" FontSize="14" 
                    HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <PasswordBox Width="504" Height="52" 
-                     HorizontalAlignment="Left" VerticalAlignment="Center" 
-                     FontSize="16"/>
+            <ContentControl 
+                Style="{StaticResource PasswordBoxWithButtonStyle}" />
         </StackPanel>
 
         <Button Grid.Row="6" 
                 Content="Зарегистрироваться" FontSize="16" 
                 Width="216" Height="39" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Style="{StaticResource StyledButton}"
                 Margin="0,20,0,0"/>
     </Grid>
 </UserControl>

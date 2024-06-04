@@ -6,46 +6,71 @@
     <local:ArrayConverter x:Key="ArrayConverter"/>
 
     <Style x:Key="PasswordBoxWithButtonStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="#415A77"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
                     <Grid>
-                        <PasswordBox x:Name="PART_PasswordBox"
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                            <Grid>
+                                <PasswordBox x:Name="PART_PasswordBox"
+                                         Width="504"
+                                         Height="52"
+                                         Background="Transparent"
+                                         Foreground="White"
+                                         Padding="10"
+                                         BorderBrush="Transparent"
+                                         FontSize="22"
+                                         VerticalContentAlignment="Center"
+                                         local:WatermarkService.Watermark="Введите пароль..."/>
+                                <TextBox x:Name="PART_TextBox"
                                      Width="504"
                                      Height="52"
-                                     Background="#415A77"
+                                     Padding="10"
+                                     Background="Transparent"
                                      Foreground="White"
+                                     BorderBrush="Transparent"
                                      FontSize="22"
                                      VerticalContentAlignment="Center"
+                                     Visibility="Collapsed"
                                      local:WatermarkService.Watermark="Введите пароль..."/>
-                        <TextBox x:Name="PART_TextBox"
-                                 Width="504"
-                                 Height="52"
-                                 Background="#415A77"
-                                 Foreground="White"
-                                 FontSize="22"
-                                 VerticalContentAlignment="Center"
-                                 Visibility="Collapsed"
-                                 local:WatermarkService.Watermark="Введите пароль..."/>
-                        <Button x:Name="PART_ShowHideButton"
-                                Content="👁"
-                                Width="52"
-                                Height="52"
-                                Background="Transparent"
-                                Foreground="White"
-                                FontSize="22"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                BorderThickness="0"
-                                Command="{Binding DataContext.TogglePasswordVisibilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource ArrayConverter}">
-                                    <Binding ElementName="PART_PasswordBox"/>
-                                    <Binding ElementName="PART_TextBox"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                        </Button>
+                                <Button x:Name="PART_ShowHideButton"
+                                    Content="👁"
+                                    Width="52"
+                                    Height="52"
+                                    Background="Transparent"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    BorderThickness="0"
+                                    Command="{Binding DataContext.TogglePasswordVisibilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource ArrayConverter}">
+                                            <Binding ElementName="PART_PasswordBox"/>
+                                            <Binding ElementName="PART_TextBox"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                </Button>
+                            </Grid>
+                        </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PART_PasswordBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_TextBox" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter TargetName="PART_PasswordBox" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_TextBox" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -55,7 +80,7 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Content">
             <Setter.Value>
-                <fa:ImageAwesome Icon="Solid_ArrowLeft"  Margin="0, 0, 5, 0" Height="16"/>
+                <fa:ImageAwesome Icon="Solid_ArrowLeft" HorizontalAlignment="Center" PrimaryColor="#778DA9" Margin="0, 0, 5, 0" Height="16"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="#2E3B4E"/>
@@ -79,10 +104,88 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#415A77"/>
+                            <Setter Property="Background" Value="#2E3B4E"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#1B2B38"/>
+                            <Setter Property="Background" Value="#1B263B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="StyledButton" TargetType="Button">
+        <Setter Property="Background" Value="#415A77"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2E3B4E"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#3B5876"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="StyledTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="#415A77"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border Name="border" Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"/>
+                                <TextBlock x:Name="WatermarkText"
+                                       Text="{Binding (local:WatermarkService.Watermark), RelativeSource={RelativeSource TemplatedParent}}"
+                                       Foreground="Gray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FF00FF00"/>
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
