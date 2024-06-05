@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AniBased.Repository.Interface
 {
-    internal interface IAnimeRepository
+    internal interface IUserRepository
     {
-        public Task<AnimeDAL> GetByIdAsync(int id);
-        public Task AddAsync(AnimeDAL animeDAL);
+        public Task<UserDAL> GetByIdAsync(int id);
+        public Task AddAsync(UserDAL userDAL);
         public Task DeleteAsync(int id);
     }
 }

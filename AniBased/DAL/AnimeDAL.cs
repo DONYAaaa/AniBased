@@ -18,6 +18,8 @@ namespace AniBased.DAL
         public string Dubbing { get; set; }
         public string LinkToView { get; set; }
         public byte[] Poster { get; set; }
+        public List<GenreDAL> Genres { get; set; }
+        public StudioDAL Studio { get; set; }
     }
 
 }

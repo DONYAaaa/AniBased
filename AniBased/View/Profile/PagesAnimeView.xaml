@@ -36,6 +36,11 @@
                 <ContentControl Content="{Binding WindowPlanned}"/>
             </TabItem>
 
+            <TabItem Width="150" Header="Смотрю" 
+                     Style="{StaticResource STabItem}">
+                <ContentControl Content="{Binding WindowWatching}"/>
+            </TabItem>
+
         </TabControl>
         
     </Grid>

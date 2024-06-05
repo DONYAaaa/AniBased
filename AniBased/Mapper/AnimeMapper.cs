@@ -24,7 +24,9 @@ namespace AniBased.Mapper
                                 .AddImage(ConvertBytesArrayToImage(entity.Poster))
                                 .AddAgeRestriction(entity.AgeRestriction)
                                 .AddReleaseDate(entity.ReleaseDate)
-                                .Build(); //TODO что делать с жанрами и студиями и в обратную
+                                .AddGenres(ConvertGenresDALToGenres(entity.Genres))
+                                .AddStudio(ConvertStudioDALToSudio(entity.Studio))
+                                .Build();
         }
 
         private static Image ConvertBytesArrayToImage(byte[] bytes)
@@ -33,6 +35,22 @@ namespace AniBased.Mapper
             {
                 return Image.FromStream(ms);
             }
+        }
+
+        private static List<Genre> ConvertGenresDALToGenres(List<GenreDAL> genresDAL)
+        {
+            List<Genre> genres = new List<Genre>();
+            foreach (var item in genresDAL)
+            {
+                genres.Add(new Genre(item.Name, item.Description));
+            }
+            return genres;
+        }
+
+        private static Studio ConvertStudioDALToSudio(StudioDAL studioDAL)
+        {
+            Studio studio = new Studio(studioDAL.Name, studioDAL.Description);
+            return studio;
         }
 
         public static AnimeDAL ToDAL(this Anime entity)
@@ -47,15 +65,41 @@ namespace AniBased.Mapper
                 Dubbing = entity.Dubbing,
                 ReleaseDate = entity.ReleaseDate,
                 AgeRestriction = entity.AgeRestriction,
+                Genres = ConvertGenresToGenresDAL(entity.Genres),
+                Studio = ConvertStudioToSudioDAL(entity.Studio),
                 Poster = ConvertImageToByteArray(entity.Image)
             };
+        }
+
+        private static List<GenreDAL> ConvertGenresToGenresDAL(List<Genre> genres)
+        {
+            List<GenreDAL> genreDALs = new List<GenreDAL>();
+            foreach (var item in genres)
+            {
+                genreDALs.Add(new GenreDAL
+                {
+                    Name = item.Name,
+                    Description = item.Description
+                });
+            }
+            return genreDALs;
+        }
+
+        private static StudioDAL ConvertStudioToSudioDAL(Studio studio)
+        {
+            StudioDAL studioDAL = new StudioDAL
+            {
+                Name = studio.Name,
+                Description = studio.Description
+            };
+            return studioDAL;
         }
 
         public static byte[] ConvertImageToByteArray(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // сохраняем изображение в поток в формате PNG
+                image.Save(ms, ImageFormat.Png); // сохраняем изображение в поток в формате PNG
                 return ms.ToArray(); // возвращаем массив байтов
             }
         }

@@ -19,49 +19,49 @@ namespace AniBased.Repository
             _connectionString = connectionString;
         }
 
-        public void Add(AnimeDAL animeDAL)
+        public async Task AddAsync(AnimeDAL animeDAL)
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                connection.Open();
-                var command = new NpgsqlCommand("INSERT INTO Animes (Id, Name, yearofrealise, description, linkofanime, agerestriction, dubbing, poster) " +
-                                                "VALUES (@StartDate, @IdOrganization)", connection);
+                await connection.OpenAsync();
+                var command = new NpgsqlCommand("CALL add_anime(Id, Name, yearofrealise, numberofepisodes, description, linkofanime, agerestriction, dubbing, poster) ", connection);
                 command.Parameters.AddWithValue("@Id", animeDAL.Id);
                 command.Parameters.AddWithValue("@Name", animeDAL.Name);
                 command.Parameters.AddWithValue("@yearofrealise", animeDAL.ReleaseDate);
+                command.Parameters.AddWithValue("@numberofepisodes", animeDAL.NumberOfEpisodes);
                 command.Parameters.AddWithValue("@description", animeDAL.Description);
                 command.Parameters.AddWithValue("@linkofanime", animeDAL.LinkToView);
                 command.Parameters.AddWithValue("@agerestriction", animeDAL.AgeRestriction);
                 command.Parameters.AddWithValue("@dubbing", animeDAL.Dubbing);
                 command.Parameters.AddWithValue("@poster", animeDAL.Poster);
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync();
             }
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            using (var connection = new NpgsqlConnection(_connectionString)) //TODO Как быть с каскадным удалением
+            using (var connection = new NpgsqlConnection(_connectionString))
             {
-                connection.Open();
-                var command = new NpgsqlCommand("DELETE FROM Animes WHERE Id = @Id", connection);
+                await connection.OpenAsync();
+                var command = new NpgsqlCommand("CALL delete_anime(@Id)", connection);
                 command.Parameters.AddWithValue("@Id", id);
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync();
             }
         }
 
-        public AnimeDAL GetByid(int id)
+        public async Task<AnimeDAL> GetByIdAsync(int id)
         {
             AnimeDAL animeDAL = null;
 
-            using (var connection = new NpgsqlConnection(_connectionString)) //TODO как быть с жанрами и студиями
+            using (var connection = new NpgsqlConnection(_connectionString))
             {
-                connection.Open();
+                await connection.OpenAsync();
                 var command = new NpgsqlCommand("SELECT * FROM Animes WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
-                using (var reader = command.ExecuteReader())
+                using (var reader = await command.ExecuteReaderAsync())
                 {
-                    if (reader.Read())
+                    if (await reader.ReadAsync())
                     {
                         animeDAL.Id = (int)reader["Id"];
                         animeDAL.Name = (string)reader["Name"];
@@ -72,6 +72,34 @@ namespace AniBased.Repository
                         animeDAL.AgeRestriction = (int)reader["agerestriction"];
                         animeDAL.Dubbing = (string)reader["dubbing"];
                         animeDAL.Poster = (byte[])reader["poster"];
+                    }
+                }
+
+                command = new NpgsqlCommand("SELECT * FROM get_genres_by_id(@id_argument)", connection);
+                command.Parameters.AddWithValue("@id_argument", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        GenreDAL genre = new GenreDAL();
+                        genre.Name = (string)reader["name"];
+                        genre.Description = (string)reader["description"];
+                        animeDAL.Genres.Add(genre);
+                    }
+                }
+
+                command = new NpgsqlCommand("SELECT * FROM get_studio_by_anime_id(@id_argument)", connection);
+                command.Parameters.AddWithValue("@id_argument", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        StudioDAL studio = new StudioDAL();
+                        studio.Name = (string)reader["name"];
+                        studio.Description = (string)reader["description"];
+                        animeDAL.Studio = studio;
                     }
                 }
             }

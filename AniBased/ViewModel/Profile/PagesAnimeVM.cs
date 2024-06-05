@@ -36,6 +36,9 @@ namespace AniBased.ViewModel.Profile
         private WindowAnimesVM _windowPlanned;
         public WindowAnimesVM WindowPlanned { get => _windowPlanned; set => Set(ref _windowPlanned, value); }
 
+        private WindowAnimesVM _windowWatching;
+        public WindowAnimesVM WindowWatching { get => _windowWatching; set => Set(ref _windowWatching, value); }
+
         #endregion
 
         #region КОМАНДЫ
@@ -73,6 +76,7 @@ namespace AniBased.ViewModel.Profile
             WindowViewed = new WindowAnimesVM(_mainVM);
             WindowHistory = new WindowAnimesVM(_mainVM);
             WindowPlanned = new WindowAnimesVM(_mainVM);
+            WindowWatching = new WindowAnimesVM(_mainVM);
         }
     }
 }

@@ -18,11 +18,6 @@ namespace AniBased.Model.BLL.Entities
 
         public Library()
         {
-            Favorites = new PageOfAnime();
-            Viewed = new PageOfAnime();
-            Watching = new PageOfAnime();
-            History = new PageOfAnime();
-            Planned = new PageOfAnime();
         }
     }
 }

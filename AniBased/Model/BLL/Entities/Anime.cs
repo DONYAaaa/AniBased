@@ -88,11 +88,17 @@ namespace AniBased.Model.BLL.Entities
                         return this;
                     }
 
-                    public virtual FinalAnimeBuilder AddGenre(Genre Ganre)
+                    public virtual FinalAnimeBuilder AddGenre(Genre Genre)
                     {
-                        anime.Genres.Add(Ganre);
+                        anime.Genres.Add(Genre);
                         return this;
                     }
+                    public virtual FinalAnimeBuilder AddGenres(List<Genre> Genre)
+                    {
+                        anime.Genres = anime.Genres.Concat(Genre).ToList();
+                        return this;
+                    }
+
 
                     public virtual FinalAnimeBuilder AddImage(Image image)
                     {

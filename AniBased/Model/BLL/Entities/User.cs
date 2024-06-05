@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static AniBased.Model.BLL.Entities.Anime;
 
 namespace AniBased.Model.BLL.Entities
 {
     internal class User
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private string Email { get; set; }
-        private string Password { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+        public DateOnly DateOfBirth { get; private set; }
 
-        private Library Library { get; set; }
+        public Library Library { get; set; }
+
+        public static UserBuilder Builder => new UserBuilder();
 
         private User() { }
 
@@ -21,6 +25,7 @@ namespace AniBased.Model.BLL.Entities
         public class UserBuilder
         {
             User user;
+
 
             public UserBuilder()
             {
@@ -73,13 +78,30 @@ namespace AniBased.Model.BLL.Entities
                             this.user = user;
                         }
 
-                        public PasswordUserBuilder AddPassword(string password)
+                        public FinalUserBuilder AddPassword(string password)
                         {
                             user.Password = password;
-                            return this;
+                            return new FinalUserBuilder(user);
                         }
 
-                        public User Build() { return user; }
+                        public class FinalUserBuilder
+                        {
+                            public User user;
+
+                            public FinalUserBuilder(User user)
+                            {
+                                this.user = user;
+                            }
+
+                            public FinalUserBuilder AddDateOfBirth(DateOnly dateOfBirth)
+                            {
+                                user.DateOfBirth = dateOfBirth;
+                                return this;
+                            }
+
+                            public User Build() { return user; }
+                        }
+
                     }
                 }
             }

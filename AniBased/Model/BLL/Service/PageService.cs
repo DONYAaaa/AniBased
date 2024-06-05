@@ -1,6 +1,5 @@
 ﻿using AniBased.Model.BLL.Entities;
 using AniBased.Repository.Interface;
-using AniBased.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Service
 {
-    internal class AnimeService
+    internal class PageService
     {
-        private readonly IAnimeRepository _animeRepository;
+        private readonly IPageRepository _pageRepository;
 
-        public AnimeService(IAnimeRepository animeRepository)
+        public PageService(IPageRepository userRepository)
         {
-            _animeRepository = animeRepository;
+            _pageRepository = userRepository;
         }
 
-        public async Task<Anime> GetAnimeById(int id)
+        public async Task<User> GetPageById(int id)
         {
             try
             {
-                var animeEntities = await _animeRepository.GetByIdAsync(id);
-                return animeEntities?.ToBLL();
+                var pageEntities = await _pageRepository.GetByIdAsync(id);
+                return userEntities?.ToBLL();
             }
             catch (Exception)
             {
@@ -31,12 +30,12 @@ namespace AniBased.Model.BLL.Service
             }
         }
 
-        public async Task CreateAnime(Anime anime)
+        public async Task CreateUser(User user)
         {
             try
             {
-                var animeEntities = anime.ToDAL();
-                await _animeRepository.AddAsync(animeEntities);
+                var userEntities = user.ToDAL();
+                await _pageRepository.AddAsync(userEntities);
             }
             catch (Exception)
             {
@@ -44,11 +43,11 @@ namespace AniBased.Model.BLL.Service
             }
         }
 
-        public async Task DeleteAnime(int id)
+        public async Task DeleteUser(int id)
         {
             try
             {
-                _animeRepository.DeleteAsync(id);
+                _pageRepository.DeleteAsync(id);
             }
             catch (Exception)
             {
