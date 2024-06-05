@@ -11,7 +11,7 @@ namespace AniBased.Model.BLL.Entities
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public int ReleaseDate { get; private set; }
+        public DateOnly ReleaseDate { get; private set; }
         public int NumberOfEpisodes { get; private set; }
         public List<Genre> Genres { get; private set; }
         public string Description { get; private set; }
@@ -70,7 +70,7 @@ namespace AniBased.Model.BLL.Entities
                         this.anime = anime;
                     }
 
-                    public FinalAnimeBuilder AddReleaseDate(int ReleaseDate)
+                    public FinalAnimeBuilder AddReleaseDate(DateOnly ReleaseDate)
                     {
                         anime.ReleaseDate = ReleaseDate;
                         return this;

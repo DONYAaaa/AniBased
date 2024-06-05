@@ -23,7 +23,7 @@ namespace AniBased.Mapper
                                 .AddDubbing(entity.Dubbing)
                                 .AddImage(ConvertBytesArrayToImage(entity.Poster))
                                 .AddAgeRestriction(entity.AgeRestriction)
-                                .AddReleaseDate(entity.ReleaseDate.Year)
+                                .AddReleaseDate(entity.ReleaseDate)
                                 .Build(); //TODO что делать с жанрами и студиями и в обратную
         }
 
@@ -32,6 +32,31 @@ namespace AniBased.Mapper
             using (MemoryStream ms = new MemoryStream(bytes))
             {
                 return Image.FromStream(ms);
+            }
+        }
+
+        public static AnimeDAL ToDAL(this Anime entity)
+        {
+            return new AnimeDAL
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                LinkToView = entity.LinkToView,
+                NumberOfEpisodes = entity.NumberOfEpisodes,
+                Description = entity.Description,
+                Dubbing = entity.Dubbing,
+                ReleaseDate = entity.ReleaseDate,
+                AgeRestriction = entity.AgeRestriction,
+                Poster = ConvertImageToByteArray(entity.Image)
+            };
+        }
+
+        public static byte[] ConvertImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // сохраняем изображение в поток в формате PNG
+                return ms.ToArray(); // возвращаем массив байтов
             }
         }
 
