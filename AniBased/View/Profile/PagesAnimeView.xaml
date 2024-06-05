@@ -6,7 +6,37 @@
              xmlns:local="clr-namespace:AniBased.View.Profile"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\View\Resource\Style\HomeStyle.xaml"/>
+    </UserControl.Resources>
+
+    <Grid  Background="#1B263B" Margin="10">
+        <TabControl Background="#1B263B">
+
+            <TabItem Width="150" Header="Избранное" 
+                     Style="{StaticResource STabItem}">
+                <Grid>
+                    <ContentControl Content="{Binding WindowFavorites}"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Width="150" Header="Просмотренное" 
+                      Style="{StaticResource STabItem}">
+                <ContentControl Content="{Binding WindowViewed}"/>
+            </TabItem>
+
+            <TabItem Width="150" Header="История просмотра" 
+                     Style="{StaticResource STabItem}">
+                <ContentControl Content="{Binding WindowHistory}"/>
+            </TabItem>
+
+            <TabItem Width="150" Header="В планах" 
+                     Style="{StaticResource STabItem}">
+                <ContentControl Content="{Binding WindowPlanned}"/>
+            </TabItem>
+
+        </TabControl>
+        
     </Grid>
 </UserControl>

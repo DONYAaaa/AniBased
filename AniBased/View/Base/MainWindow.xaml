@@ -15,7 +15,7 @@
         Height="{Binding HeightWindow, Mode=TwoWay}" Width="{Binding WidthWindow, Mode=TwoWay}" 
         Background="#0D1B2A" WindowStartupLocation="CenterScreen"
         Top="{Binding X, Mode=TwoWay}" Left="{Binding Y, Mode=TwoWay}"
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="None">
     
 
     
@@ -77,7 +77,7 @@
 
     <Grid>
         <StackPanel Background="#0D1B2A">
-            <!--<ContentControl Content="{Binding ToolBarVM}"/>-->
+            <ContentControl Content="{Binding ToolBarVM}"/>
             <ContentControl Content="{Binding StartVM}"/>
         </StackPanel>
     </Grid>

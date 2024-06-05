@@ -70,6 +70,7 @@ namespace AniBased.ViewModel
             _mainVM.StartVM = _mainVM.HomeVM;
             _mainVM.SetStartLocation();
             _mainVM.HomeVM.MakeFullScreen();
+            await _mainVM.PagesAnimeVM.InitializeComponent();
         }
 
         private bool CanEntry()

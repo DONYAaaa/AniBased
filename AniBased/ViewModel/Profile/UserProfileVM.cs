@@ -17,6 +17,15 @@ namespace AniBased.ViewModel.Profile
 
         #region СВОЙСТВА
 
+        private string _nickName;
+        public string Nicname { get=>_nickName; set=>Set(ref _nickName, value); }
+
+        private DateOnly _dateOfBirth;
+        public DateOnly DateOfBirth { get => _dateOfBirth; set => Set(ref _dateOfBirth, value); }
+
+        private string _mail;
+        public string Mail { get => _mail; set => Set(ref _mail, value); }
+
         #endregion
 
         #region КОМАНДЫ

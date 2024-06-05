@@ -45,25 +45,6 @@ namespace AniBased.ViewModel
 
         #endregion
 
-        #region Свернуть окно
-
-        public ICommand MinimazedWindowCommand
-        {
-            get => new RelayCommand((_) => MinimazedWindow(),
-                                    (_) => CanMinimazedWindow());
-        }
-
-        private void MinimazedWindow()
-        {
-            
-        }
-
-        private bool CanMinimazedWindow()
-        {
-            return true;
-        }
-
-        #endregion
 
         #endregion
 
