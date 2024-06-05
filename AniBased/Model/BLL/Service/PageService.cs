@@ -1,4 +1,5 @@
-﻿using AniBased.Model.BLL.Entities;
+﻿using AniBased.Mapper;
+using AniBased.Model.BLL.Entities;
 using AniBased.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,12 @@ namespace AniBased.Model.BLL.Service
             _pageRepository = userRepository;
         }
 
-        public async Task<User> GetPageById(int id)
+        public async Task<PageOfAnime> GetPageById(int id)
         {
             try
             {
                 var pageEntities = await _pageRepository.GetByIdAsync(id);
-                return userEntities?.ToBLL();
+                return pageEntities?.ToBLL();
             }
             catch (Exception)
             {
@@ -30,12 +31,12 @@ namespace AniBased.Model.BLL.Service
             }
         }
 
-        public async Task CreateUser(User user)
+        public async Task CreatePage(PageOfAnime pageOfAnime)
         {
             try
             {
-                var userEntities = user.ToDAL();
-                await _pageRepository.AddAsync(userEntities);
+                var pageOfAnimeEntities = pageOfAnime.ToDAL();
+                await _pageRepository.AddAsync(pageOfAnimeEntities);
             }
             catch (Exception)
             {
@@ -43,7 +44,7 @@ namespace AniBased.Model.BLL.Service
             }
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeletePage(int id)
         {
             try
             {

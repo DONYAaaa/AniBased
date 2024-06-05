@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Repository.Interface
 {
-    internal interface IUserRepository
+    internal interface IPageRepository
     {
         public Task<PageOfAnimeDAL> GetByIdAsync(int id);
         public Task AddAsync(PageOfAnimeDAL pageOfAnimeDAL);
