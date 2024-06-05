@@ -56,6 +56,7 @@ namespace AniBased.Repository
                     if (await reader.ReadAsync())
                     {
                         studioDAL = new StudioDAL();
+                        studioDAL.Id = (int)reader["id"];
                         studioDAL.Name = (string)reader["name"];
                         studioDAL.Description = (string)reader["description"];
                     }

@@ -56,6 +56,7 @@ namespace AniBased.Repository
                     if (await reader.ReadAsync())
                     {
                         genreDAL = new GenreDAL();
+                        genreDAL.Id = (int)reader["id"];
                         genreDAL.Name = (string)reader["name"];
                         genreDAL.Description = (string)reader["description"];
                     }
