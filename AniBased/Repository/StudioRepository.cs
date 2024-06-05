@@ -9,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace AniBased.Repository
 {
-    internal class PageRepository : IPageRepository
+    internal class StudioRepository : IStudioRepository
     {
         private readonly string _connectionString;
 
-        public PageRepository(string connectionString)
+        public StudioRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
-        public async Task AddAsync(PageOfAnimeDAL pageOfAnimeDAL)
+
+        public async Task AddAsync(StudioDAL studioDAL)
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new NpgsqlCommand("CALL add_page(@Id, @name)", connection);
-                command.Parameters.AddWithValue("@Id", pageOfAnimeDAL.Id);
-                command.Parameters.AddWithValue("@name", pageOfAnimeDAL.Name);
+                var command = new NpgsqlCommand("CALL add_studio(@name, @description)", connection);
+                command.Parameters.AddWithValue("@name", studioDAL.Name);
+                command.Parameters.AddWithValue("@description", studioDAL.Description);
                 await command.ExecuteNonQueryAsync();
             }
         }
@@ -34,39 +35,39 @@ namespace AniBased.Repository
             using (var connection = new NpgsqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new NpgsqlCommand("CALL delete_page_by_id(@Id)", connection);
+                var command = new NpgsqlCommand("CALL delete_studio(@Id)", connection);
                 command.Parameters.AddWithValue("@Id", id);
                 await command.ExecuteNonQueryAsync();
             }
         }
 
-        public async Task<PageOfAnimeDAL> GetByIdAsync(int id)
+        public async Task<StudioDAL> GetByIdAsync(int id)
         {
-            PageOfAnimeDAL pageOfAnimeDAL = null;
+            StudioDAL studioDAL = null;
 
             using (var connection = new NpgsqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new NpgsqlCommand("SELECT * FROM pageofAnime WHERE Id = @Id", connection);
+                var command = new NpgsqlCommand("SELECT * FROM studios WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     if (await reader.ReadAsync())
                     {
-                        pageOfAnimeDAL = new PageOfAnimeDAL();
-                        pageOfAnimeDAL.Id = (int)reader["Id"];
-                        pageOfAnimeDAL.Name = (string)reader["name"];
+                        studioDAL = new StudioDAL();
+                        studioDAL.Name = (string)reader["name"];
+                        studioDAL.Description = (string)reader["description"];
                     }
                 }
             }
 
-            if (pageOfAnimeDAL == null)
+            if (studioDAL == null)
             {
-                throw new Exception("Не удалось найти страничку по такому Id");
+                throw new Exception("Не удалось найти студию по такому Id");
             }
 
-            return pageOfAnimeDAL;
+            return studioDAL;
         }
     }
 }
