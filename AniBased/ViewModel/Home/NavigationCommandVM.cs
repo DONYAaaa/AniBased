@@ -1,9 +1,12 @@
-﻿using AniBased.ViewModel.Base;
+﻿using AniBased.Infastructure.Command;
+using AniBased.ViewModel.Base;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AniBased.ViewModel.Home
 {
@@ -20,6 +23,51 @@ namespace AniBased.ViewModel.Home
         #endregion
 
         #region КОМАНДЫ
+
+        #region Открыть профиль
+
+        public ICommand ProfileOpenCommand
+        {
+            get => new RelayCommand((_) => OnProfileOpenCommand(),
+                                    (_) => CanProfileOpenCommand());
+        }
+
+        private void OnProfileOpenCommand()
+        {
+            _mainVM.StartVM = _mainVM.MainProfileVM;
+            _mainVM.MainProfileVM.MakeFullScreen();
+        }
+
+        private bool CanProfileOpenCommand()
+        {
+            if (_mainVM.StartVM == _mainVM.HomeVM)
+                return true;
+            else return false;
+        }
+
+        #endregion
+
+        #region Открыть главную
+
+        public ICommand HomeOpenCommand
+        {
+            get => new RelayCommand((_) => OnHomeOpenCommand(),
+                                    (_) => CanHomeOpenCommand());
+        }
+
+        private void OnHomeOpenCommand()
+        {
+            _mainVM.StartVM = _mainVM.HomeVM;
+        }
+
+        private bool CanHomeOpenCommand()
+        {
+            if (_mainVM.StartVM == _mainVM.MainProfileVM)
+                return true;
+            else return false;
+        }
+
+        #endregion
 
         #endregion
 

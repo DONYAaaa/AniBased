@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AniBased.View.Home"
              mc:Ignorable="d" 
              Height="228" Width="708">
-    <Grid>
+    <Grid Margin="10">
         <Border Background="#415A77"
                             BorderBrush="Transparent"
                             CornerRadius="16">

@@ -18,23 +18,80 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer>
-                <DataGrid AutoGenerateColumns="False" Background="#2E3B4E">
-                    <DataGridComboBoxColumn Header="Фильтр" Width="70">
-                    </DataGridComboBoxColumn>
-                    <DataGridCheckBoxColumn Header="Применить" Width="70">
-                    </DataGridCheckBoxColumn>
-                </DataGrid>
-            </ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" 
+                            Margin="5" VerticalAlignment="Center">
+                    <TextBlock Text="Год выпуска" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               FontSize="16" Foreground="White"/>
+                    <ComboBox Margin="10" 
+                              ItemsSource="{Binding YearsOfRealese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding RealeseDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                
+                <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsCheckedYear}"
+                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" 
+                            Margin="5" VerticalAlignment="Center">
+                    <TextBlock Text="Выпускающая студия" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               FontSize="16" Foreground="White"/>
+                    <ComboBox Margin="10" 
+                              ItemsSource="{Binding Studios, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding Studio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+
+                <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding IsCheckedStudio}"
+                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" 
+                            Margin="5" VerticalAlignment="Center">
+                    <TextBlock Text="Количество эпизодов" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               FontSize="16" Foreground="White"/>
+                    <ComboBox Margin="10" 
+                              ItemsSource="{Binding NumbersOfEpisode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding CountOfEpisode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsCheckedNumberOfEpisode}"
+                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            </Grid>
 
             <StackPanel Grid.Row="1">
                 <TextBlock HorizontalAlignment="Center" 
                            Text="Жанр" Foreground="White"
                            FontSize="18" Margin="5"/>
-                <ComboBox Margin="5"/>
-                <Button Style="{StaticResource StyledButton}" Content="Добавить жанр"
-                        Height="40" Width="100"
-                        Margin="10" Padding="10"/>
+                <ComboBox Margin="10" 
+                          ItemsSource="{Binding Genres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding Genre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    
+                    <Button Style="{StaticResource StyledButton}" Content="Добавить жанр"
+                            Command="{Binding AddGenre}"
+                            Height="40" Width="100"
+                            Margin="10" Padding="10"/>
+
+                    <Button Style="{StaticResource StyledButton}" Content="Очистить жанры"
+                            Command="{Binding RefreshGenres}"
+                            Height="40" Width="100"
+                            Margin="10" Padding="10"/>
+                </StackPanel>
+            
             </StackPanel>
         </Grid>
     </Border>

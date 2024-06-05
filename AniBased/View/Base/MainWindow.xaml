@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:AniBased"
         xmlns:views ="clr-namespace:AniBased.View"
         xmlns:viewsHome ="clr-namespace:AniBased.View.Home"
+        xmlns:viewsProfile ="clr-namespace:AniBased.View.Profile"
         xmlns:vm ="clr-namespace:AniBased.ViewModel"
         xmlns:vmHome ="clr-namespace:AniBased.ViewModel.Home"
+        xmlns:vmProfile ="clr-namespace:AniBased.ViewModel.Profile"
         mc:Ignorable="d"
         Title="MainWindow" SizeToContent="WidthAndHeight" 
-        Height="auto" Width="auto" Background="#0D1B2A"
-        WindowStartupLocation="CenterScreen"
+        Height="{Binding HeightWindow, Mode=TwoWay}" Width="{Binding WidthWindow, Mode=TwoWay}" 
+        Background="#0D1B2A" WindowStartupLocation="CenterScreen"
         Top="{Binding X, Mode=TwoWay}" Left="{Binding Y, Mode=TwoWay}"
         WindowStyle="SingleBorderWindow">
     
@@ -58,6 +60,19 @@
         <DataTemplate DataType="{x:Type vmHome:PosterVM}">
             <viewsHome:Poster/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmProfile:MainProfileVM}">
+            <viewsProfile:MainProfileView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmProfile:PagesAnimeVM}">
+            <viewsProfile:PagesAnimeView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vmProfile:UserProfileVM}">
+            <viewsProfile:UserProfileView/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>

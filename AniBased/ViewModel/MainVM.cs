@@ -1,5 +1,6 @@
 ﻿using AniBased.ViewModel.Base;
 using AniBased.ViewModel.Home;
+using AniBased.ViewModel.Profile;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace AniBased.ViewModel
 
         private double _y;
         public double Y { get => _y; set => Set(ref _y, value); }
+
 
         private BaseVM _startVM;
         public BaseVM StartVM { get => _startVM; set => Set(ref _startVM, value); }
@@ -49,7 +51,24 @@ namespace AniBased.ViewModel
 
         private NewsBlockVM _newsBlockVM;
         public NewsBlockVM NewsBlockVM { get => _newsBlockVM; set => Set(ref _newsBlockVM, value); }
+
+        private PagesAnimeVM _pagesAnimeVM;
+        public PagesAnimeVM PagesAnimeVM { get => _pagesAnimeVM; set => Set(ref _pagesAnimeVM, value); }
+
+        private UserProfileVM _userProfile;
+        public UserProfileVM UserProfileVM { get => _userProfile; set => Set(ref _userProfile, value); }
+        
+        private MainProfileVM _mainProfileVM;
+        public MainProfileVM MainProfileVM { get => _mainProfileVM; set => Set(ref _mainProfileVM, value); }
+
         #endregion
+
+        public void SetStartLocation()
+        {
+            X = 0;
+            Y = 0;
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+        }
 
         public MainVM() 
         {
@@ -62,6 +81,9 @@ namespace AniBased.ViewModel
             _windowAnimesVM = new WindowAnimesVM(this);
             _newsBlockVM = new NewsBlockVM(this);
             _homeVM = new HomeVM(this);
+            _pagesAnimeVM = new PagesAnimeVM(this);
+            _userProfile = new UserProfileVM(this);
+            _mainProfileVM = new MainProfileVM(this);
         } 
     }
 }

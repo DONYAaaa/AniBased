@@ -15,11 +15,15 @@
 
         <Button Style="{StaticResource StyledButton}" 
                 Height="45" Width="300"
+                FontSize="22"
+                Command="{Binding HomeOpenCommand}"
                 Content="Главная" Grid.Column="0"
                 Margin="0,0,10,0"/>
 
         <Button Style="{StaticResource StyledButton}" 
                 Height="45" Width="300"
+                FontSize="22"
+                Command="{Binding ProfileOpenCommand}"
                 Margin="10,0,0,0"
                 Content="Профиль" Grid.Column="1"/>
     </StackPanel>

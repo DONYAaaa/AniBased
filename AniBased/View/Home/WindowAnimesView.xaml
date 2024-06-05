@@ -6,23 +6,31 @@
              xmlns:local="clr-namespace:AniBased.View.Home"
              mc:Ignorable="d" 
              d:DesignHeight="758" d:DesignWidth="1515">
+    <UserControl.Resources>
+        <ResourceDictionary Source="\View\Resource\Style\HomeStyle.xaml"/>
+    </UserControl.Resources>
+   
     <Grid>
         <Border Background="#1B263B"
                             BorderBrush="Transparent"
                             CornerRadius="16">
             <Grid>
-                <ScrollViewer >
-                    <!--<DataGrid Background="#1B263B" AutoGenerateColumns="True" ItemsSource="{Binding Posters}">
+                <ScrollViewer Style="{StaticResource CustomScrollViewerStyle}">
+                    <DataGrid Background="#1B263B" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Posters}" Style="{StaticResource SDataGrid}"
+                              CellStyle="{StaticResource CellCenterStyle}">
+                        <DataGrid.Columns>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
+                                <DataTemplate >
                                     <Grid>
-                                        <local:Poster Content="{Binding PosterVM}"/>
+                                        <ContentControl Content="{Binding PosterVM}"/>
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    </DataGrid>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </ScrollViewer>
             </Grid>
         </Border>

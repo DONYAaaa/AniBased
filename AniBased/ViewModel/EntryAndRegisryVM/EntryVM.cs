@@ -67,9 +67,9 @@ namespace AniBased.ViewModel
 
         private async void OnEntry(object parameter)
         {
-            _mainVM.X = 0;
-            _mainVM.Y = 0;  
             _mainVM.StartVM = _mainVM.HomeVM;
+            _mainVM.SetStartLocation();
+            _mainVM.HomeVM.MakeFullScreen();
         }
 
         private bool CanEntry()
