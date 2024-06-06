@@ -17,7 +17,7 @@ using System.Collections.ObjectModel;
 
 namespace AniBased.ViewModel.Home
 {
-    class NewsBlockVM : BaseVM
+     class NewsBlockVM : BaseVM
     {
         #region ПОЛЯ
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.ViewModel.Profile
 {
-    internal class UserProfileVM : BaseVM
+    class UserProfileVM : BaseVM
     {
         #region ПОЛЯ
 

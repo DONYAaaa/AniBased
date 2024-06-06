@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class Library
+    public class Library
     {
         public PageOfAnime Favorites { get; set; }
         public PageOfAnime Viewed { get; set; }

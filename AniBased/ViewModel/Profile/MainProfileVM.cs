@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AniBased.ViewModel.Profile
 {
-    internal class MainProfileVM : BaseVM
+     class MainProfileVM : BaseVM
     {
         #region ПОЛЯ
 

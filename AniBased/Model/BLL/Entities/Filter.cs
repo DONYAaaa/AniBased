@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class Filter
+    public class Filter
     {
         public int ReleaseDate { get; private set; }
         public int NumberOfEpisodes { get; private set; }

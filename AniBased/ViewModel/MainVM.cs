@@ -14,7 +14,7 @@ using System.Windows.Media.Media3D;
 
 namespace AniBased.ViewModel
 {
-    internal class MainVM : BaseVM
+    class MainVM : BaseVM
     {
 
         #region СВОЙСТВА VM

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.ViewModel.Profile
 {
-    internal class PagesAnimeVM : BaseVM
+     class PagesAnimeVM : BaseVM
     {
         #region ПОЛЯ
 

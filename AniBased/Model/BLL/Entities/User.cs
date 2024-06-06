@@ -7,7 +7,7 @@ using static AniBased.Model.BLL.Entities.Anime;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class User
+    public class User
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

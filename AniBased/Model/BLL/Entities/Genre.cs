@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class Genre
+    public class Genre
     {
         public int Id { get; }
         public string Name { get; }

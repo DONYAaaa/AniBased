@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class Anime
+    public class Anime
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

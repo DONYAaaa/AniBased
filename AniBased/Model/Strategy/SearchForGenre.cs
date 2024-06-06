@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.Strategy
 {
-    internal class SearchForGenre : ISortAnime
+    public class SearchForGenre : ISortAnime
     {
         public List<Anime> SearchAnime(List<Anime> animes, Filter filter)
         {

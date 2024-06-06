@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace AniBased.ViewModel
 {
-    internal class ToolBarVM : BaseVM
+    class ToolBarVM : BaseVM
     {
         #region ПОЛЯ
 

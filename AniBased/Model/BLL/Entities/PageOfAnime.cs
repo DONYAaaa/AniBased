@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Entities
 {
-    internal class PageOfAnime
+    public class PageOfAnime
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

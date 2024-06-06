@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.Strategy
 {
-    internal class SearchForNumberOfEpisodes : ISortAnime
+    public class SearchForNumberOfEpisodes : ISortAnime
     {
         public List<Anime> SearchAnime(List<Anime> animes, Filter filter)
         {

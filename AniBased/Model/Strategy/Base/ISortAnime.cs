@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AniBased.Model.Strategy.Base
 {
-    internal interface ISortAnime
+    public interface ISortAnime
     {
         public List<Anime> SearchAnime(List<Anime> animes, Filter filter);
     }
