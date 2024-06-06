@@ -22,11 +22,23 @@ namespace AniBased.Repository
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
+
                 await connection.OpenAsync();
-                var command = new NpgsqlCommand("CALL add_genre(@name, @description)", connection);
-                command.Parameters.AddWithValue("@name", genreDAL.Name);
-                command.Parameters.AddWithValue("@description", genreDAL.Description);
-                await command.ExecuteNonQueryAsync();
+                var command = new NpgsqlCommand("CALL add_genre(@name_argument, @description)", connection);
+                command.Parameters.AddWithValue("@name_argument", genreDAL.Name);
+                command.Parameters.AddWithValue("@description_argument", genreDAL.Description);
+    //            await command.ExecuteNonQueryAsync();
+                
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        genreDAL = new GenreDAL();
+                        genreDAL.Id = (int)reader["id"];
+                        genreDAL.Name = (string)reader["name"];
+                        genreDAL.Description = (string)reader["description"];
+                    }
+                }
             }
         }
 

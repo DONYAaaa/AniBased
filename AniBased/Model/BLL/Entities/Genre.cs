@@ -8,11 +8,13 @@ namespace AniBased.Model.BLL.Entities
 {
     internal class Genre
     {
+        public int Id { get; }
         public string Name { get; }
         public string Description { get; }
 
-        public Genre(string name, string description)
+        public Genre(int id, string name, string description)
         {
+            Id = id;
             Name = name;
             Description = description;
         }

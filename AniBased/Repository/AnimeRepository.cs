@@ -51,7 +51,7 @@ namespace AniBased.Repository
 
         public async Task<AnimeDAL> GetByIdAsync(int id)
         {
-            AnimeDAL animeDAL = null;
+            AnimeDAL animeDAL = new AnimeDAL();
 
             using (var connection = new NpgsqlConnection(_connectionString))
             {

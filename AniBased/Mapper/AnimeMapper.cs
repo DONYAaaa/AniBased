@@ -42,7 +42,7 @@ namespace AniBased.Mapper
             List<Genre> genres = new List<Genre>();
             foreach (var item in genresDAL)
             {
-                genres.Add(new Genre(item.Name, item.Description));
+                genres.Add(new Genre(item.Id, item.Name, item.Description));
             }
             return genres;
         }

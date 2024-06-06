@@ -33,15 +33,8 @@ namespace AniBased.Model.BLL.Service
 
         public async Task CreateGenre(Genre genre)
         {
-            try
-            {
                 var genreEntities = genre.ToDAL();
                 await _genreRepository.AddAsync(genreEntities);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         public async Task DeleteGenre(int id)

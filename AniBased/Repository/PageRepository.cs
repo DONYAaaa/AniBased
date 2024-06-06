@@ -43,6 +43,7 @@ namespace AniBased.Repository
         public async Task<PageOfAnimeDAL> GetByIdAsync(int id)
         {
             PageOfAnimeDAL pageOfAnimeDAL = null;
+            IAnimeRepository animeRepository = new AnimeRepository(_connectionString);
 
             using (var connection = new NpgsqlConnection(_connectionString))
             {
@@ -58,6 +59,21 @@ namespace AniBased.Repository
                         pageOfAnimeDAL.Id = (int)reader["Id"];
                         pageOfAnimeDAL.Name = (string)reader["name"];
                     }
+                }
+
+                command = new NpgsqlCommand("SELECT * FROM get_animes_by_page_id(@id_argument)", connection);
+                command.Parameters.AddWithValue("@id_argument", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    List<AnimeDAL> animeDALs = new List<AnimeDAL>();
+                    while (await reader.ReadAsync())
+                    {
+                        int IdOfAnime = (int)reader["Id"];
+                        AnimeDAL anime = await animeRepository.GetByIdAsync(IdOfAnime);
+                        animeDALs.Add(anime);
+                    }
+                    pageOfAnimeDAL.AnimeDAL = animeDALs; 
                 }
             }
 

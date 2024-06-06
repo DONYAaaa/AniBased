@@ -1,5 +1,4 @@
-﻿using AniBased.Generator;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AniBased
+namespace GeneretorAniBASED
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,13 +23,6 @@ namespace AniBased
         public MainWindow()
         {
             InitializeComponent();
-            Generate();
-        }
-
-        private async Task Generate()
-        {
-            GeneratorDB generatorDB = new();
-            await generatorDB.Generate();
         }
     }
 }

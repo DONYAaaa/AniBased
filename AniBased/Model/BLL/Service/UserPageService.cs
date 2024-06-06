@@ -1,9 +1,6 @@
 ﻿using AniBased.DAL;
 using AniBased.Repository.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AniBased.Model.BLL.Service
@@ -17,7 +14,7 @@ namespace AniBased.Model.BLL.Service
             _userPageRepository = userPageRepository;
         }
 
-        public async Task AddInstallationWorkerAsync(UserDAL userDAL, PageOfAnimeDAL pageDal)
+        public async Task AddUserPageAsync(UserDAL userDAL, PageOfAnimeDAL pageDal)
         {
             try
             {

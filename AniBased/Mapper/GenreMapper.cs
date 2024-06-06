@@ -12,13 +12,14 @@ namespace AniBased.Mapper
     {
         public static Genre ToBLL(this GenreDAL entity)
         {
-            return new Genre(entity.Name, entity.Description);
+            return new Genre(entity.Id, entity.Name, entity.Description);
         }
 
         public static GenreDAL ToDAL(this Genre entity)
         {
             return new GenreDAL
             {
+                Id = entity.Id,
                 Name = entity.Name,
                 Description = entity.Description,
             };
