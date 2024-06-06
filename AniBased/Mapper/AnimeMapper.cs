@@ -21,7 +21,6 @@ namespace AniBased.Mapper
                                 .AddNumberOfEpisodes(entity.NumberOfEpisodes)
                                 .AddDescription(entity.Description)
                                 .AddDubbing(entity.Dubbing)
-                                .AddImage(ConvertBytesArrayToImage(entity.Poster))
                                 .AddAgeRestriction(entity.AgeRestriction)
                                 .AddReleaseDate(entity.ReleaseDate)
                                 .AddGenres(ConvertGenresDALToGenres(entity.Genres))
@@ -39,12 +38,16 @@ namespace AniBased.Mapper
 
         private static List<Genre> ConvertGenresDALToGenres(List<GenreDAL> genresDAL)
         {
-            List<Genre> genres = new List<Genre>();
-            foreach (var item in genresDAL)
+            if (genresDAL != null)
             {
-                genres.Add(new Genre(item.Id, item.Name, item.Description));
+                List<Genre> genres = new List<Genre>();
+                foreach (var item in genresDAL)
+                {
+                    genres.Add(new Genre(item.Id, item.Name, item.Description));
+                }
+                return genres;
             }
-            return genres;
+            else return null;
         }
 
         private static Studio ConvertStudioDALToSudio(StudioDAL studioDAL)
@@ -104,5 +107,16 @@ namespace AniBased.Mapper
             }
         }
 
+        public static List<Anime> ToListBLL(this List<AnimeDAL> animeDALs)
+        {
+            List<Anime> animes = new List<Anime>();
+
+            foreach (var item in animeDALs)
+            {
+                animes.Add(item.ToBLL());
+            }
+
+            return animes;
+        }
     }
 }

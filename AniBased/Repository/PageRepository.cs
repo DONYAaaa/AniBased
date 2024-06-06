@@ -47,11 +47,11 @@ namespace AniBased.Repository
 
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                await connection.OpenAsync();
+                connection.Open();
                 var command = new NpgsqlCommand("SELECT * FROM pageofAnime WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var reader = command.ExecuteReader())
                 {
                     if (await reader.ReadAsync())
                     {
@@ -64,7 +64,7 @@ namespace AniBased.Repository
                 command = new NpgsqlCommand("SELECT * FROM get_animes_by_page_id(@id_argument)", connection);
                 command.Parameters.AddWithValue("@id_argument", id);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var reader = command.ExecuteReader())
                 {
                     List<AnimeDAL> animeDALs = new List<AnimeDAL>();
                     while (await reader.ReadAsync())

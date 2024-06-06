@@ -28,11 +28,10 @@ namespace AniBased.ViewModel.Home
 
         public ICommand ProfileOpenCommand
         {
-            get => new RelayCommand((_) => OnProfileOpenCommand(),
-                                    (_) => CanProfileOpenCommand());
+            get => new AsyncRelayCommand(OnProfileOpenCommand, CanProfileOpenCommand);
         }
 
-        private void OnProfileOpenCommand()
+        private async Task OnProfileOpenCommand()
         {
             _mainVM.StartVM = _mainVM.MainProfileVM;
             _mainVM.MainProfileVM.MakeFullScreen();
@@ -51,11 +50,10 @@ namespace AniBased.ViewModel.Home
 
         public ICommand HomeOpenCommand
         {
-            get => new RelayCommand((_) => OnHomeOpenCommand(),
-                                    (_) => CanHomeOpenCommand());
+            get => new AsyncRelayCommand(OnHomeOpenCommand, CanHomeOpenCommand);
         }
 
-        private void OnHomeOpenCommand()
+        private async Task OnHomeOpenCommand()
         {
             _mainVM.StartVM = _mainVM.HomeVM;
         }

@@ -55,31 +55,32 @@ namespace AniBased.Repository
 
             using (var connection = new NpgsqlConnection(_connectionString))
             {
-                await connection.OpenAsync();
+                connection.Open();
                 var command = new NpgsqlCommand("SELECT * FROM Animes WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Id", id);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var reader = command.ExecuteReader())
                 {
                     if (await reader.ReadAsync())
                     {
                         animeDAL.Id = (int)reader["Id"];
                         animeDAL.Name = (string)reader["Name"];
-                        animeDAL.ReleaseDate = (DateOnly)reader["yearofrealese"];
+                        DateTime dateTime = (DateTime)reader["yearofrealise"];
+                        animeDAL.ReleaseDate = new DateOnly(dateTime.Year, dateTime.Month, dateTime.Day);
                         animeDAL.NumberOfEpisodes = (int)reader["numberofepisodes"];
                         animeDAL.Description = (string)reader["Description"];
                         animeDAL.LinkToView = (string)reader["linkofanime"];
                         animeDAL.AgeRestriction = (int)reader["agerestriction"];
                         animeDAL.Dubbing = (string)reader["dubbing"];
-                        animeDAL.Poster = (byte[])reader["poster"];
                     }
                 }
 
                 command = new NpgsqlCommand("SELECT * FROM get_genres_by_id(@id_argument)", connection);
                 command.Parameters.AddWithValue("@id_argument", id);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var reader = command.ExecuteReader())
                 {
+                    animeDAL.Genres = new List<GenreDAL>();
                     while (await reader.ReadAsync())
                     {
                         GenreDAL genre = new GenreDAL();
@@ -92,17 +93,18 @@ namespace AniBased.Repository
                 command = new NpgsqlCommand("SELECT * FROM get_studio_by_anime_id(@id_argument)", connection);
                 command.Parameters.AddWithValue("@id_argument", id);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var reader = command.ExecuteReader())
                 {
                     if (await reader.ReadAsync())
                     {
                         StudioDAL studio = new StudioDAL();
-                        studio.Name = (string)reader["name"];
-                        studio.Description = (string)reader["description"];
+                        studio.Name = (string)reader["studioname"];
+                        studio.Description = (string)reader["studiodescription"];
                         animeDAL.Studio = studio;
                     }
                 }
             }
+
 
             if (animeDAL == null)
             {
@@ -110,6 +112,89 @@ namespace AniBased.Repository
             }
 
             return animeDAL;
+        }
+
+        public async Task<List<AnimeDAL>> GetAllAsync()
+        {
+            List<AnimeDAL> animes = new List<AnimeDAL>();
+
+            using (var connection = new NpgsqlConnection(_connectionString))
+            {
+                connection.Open();
+                var command = new NpgsqlCommand("SELECT * FROM public.animes\r\nORDER BY id ASC ", connection);
+
+                var reader = command.ExecuteReader();
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        AnimeDAL animeDAL = new AnimeDAL();
+                        animeDAL.Id = (int)reader["Id"];
+                        animeDAL.Name = (string)reader["Name"];
+                        DateTime dateTime = (DateTime)reader["yearofrealise"];
+                        animeDAL.ReleaseDate = new DateOnly(dateTime.Year, dateTime.Month, dateTime.Day);
+                        animeDAL.NumberOfEpisodes = (int)reader["numberofepisodes"];
+                        animeDAL.Description = (string)reader["Description"];
+                        animeDAL.LinkToView = (string)reader["linkofanime"];
+                        animeDAL.AgeRestriction = (int)reader["agerestriction"];
+                        animeDAL.Dubbing = (string)reader["dubbing"];
+
+
+                        animeDAL.Genres = GetGenreByAnimeId(animeDAL.Id);
+
+                        animeDAL.Studio = GetStudioByAnimeId(animeDAL.Id);
+
+
+                        animes.Add(animeDAL);
+                    }
+                }
+            }
+            
+            return animes;
+        }
+
+        private List<GenreDAL> GetGenreByAnimeId(int id)
+        {
+            using (var connection = new NpgsqlConnection(_connectionString))
+            {
+                connection.Open();
+                var command = new NpgsqlCommand("SELECT * FROM get_genres_by_id(@id_argument)", connection);
+                command.Parameters.AddWithValue("@id_argument", id);
+                List<GenreDAL> Genres = new List<GenreDAL>();
+
+                using (var readerInto = command.ExecuteReader())
+                {
+                    while (readerInto.Read())
+                    {
+                        GenreDAL genre = new GenreDAL();
+                        genre.Name = (string)readerInto["name"];
+                        genre.Description = (string)readerInto["description"];
+                        Genres.Add(genre);
+                    }
+                }
+            return Genres;
+            }
+        }
+
+        private StudioDAL GetStudioByAnimeId(int id)
+        {
+            using (var connection = new NpgsqlConnection(_connectionString))
+            {
+                connection.Open();
+                var command = new NpgsqlCommand("SELECT * FROM get_studio_by_anime_id(@id_argument)", connection);
+                command.Parameters.AddWithValue("@id_argument", id);
+                StudioDAL studio = new StudioDAL();
+
+                using (var readerInto = command.ExecuteReader())
+                {
+                    if (readerInto.Read())
+                    {
+                        studio.Name = (string)readerInto["studioname"];
+                        studio.Description = (string)readerInto["studiodescription"];
+                    }
+                }
+
+                return studio;
+            }
         }
     }
 }

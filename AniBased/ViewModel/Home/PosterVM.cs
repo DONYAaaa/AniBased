@@ -1,10 +1,12 @@
-﻿using AniBased.ViewModel.Base;
+﻿using AniBased.Model.BLL.Entities;
+using AniBased.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using static Bogus.DataSets.Name;
 
 namespace AniBased.ViewModel.Home
 {
@@ -49,6 +51,15 @@ namespace AniBased.ViewModel.Home
         public PosterVM(MainVM mainVM)
         {
             _mainVM = mainVM;
+        }
+
+        public PosterVM(Anime anime)
+        {
+            NameOfAnime = anime.Name;
+            Genres = string.Join(", ", anime.Genres.Select(g => g.Name));
+            Country = anime.NumberOfEpisodes.ToString();
+            Studio = anime.Studio.Name;
+            YearOfRelease = anime.ReleaseDate.ToString();
         }
     }
 }

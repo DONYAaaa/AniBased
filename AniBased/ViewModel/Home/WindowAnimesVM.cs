@@ -23,7 +23,7 @@ namespace AniBased.ViewModel.Home
         #region СВОЙСТВА
 
         private ObservableCollection<PosterRow> _posters = new ObservableCollection<PosterRow>();
-        public ObservableCollection<PosterRow> Posters { get => _posters; set => Set(ref _posters, value); }
+        public ObservableCollection<PosterRow> Posters { get => _posters; set { Set(ref _posters, value); } }
 
         #endregion
 
@@ -36,6 +36,37 @@ namespace AniBased.ViewModel.Home
         {
             OnPropertyChanged(nameof(Posters));
         }
+
+        public async Task SearchPosters(string input)
+        {
+            if (input.Length > 0)
+            {
+
+                var filteredPosters = Posters.Where(p => p.PosterVM.NameOfAnime.Contains(input, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                for (int i = Posters.Count - 1; i >= 0; i--)
+                {
+                    if (!filteredPosters.Contains(Posters[i]))
+                    {
+                        Posters.RemoveAt(i);
+                    }
+                }
+
+                foreach (var poster in filteredPosters)
+                {
+                    if (!Posters.Contains(poster))
+                    {
+                        Posters.Add(poster);
+                    }
+                }
+            }
+            else
+            {
+                _mainVM.EntryVM.GetAllPosters();
+            }
+        }
+
+
         #endregion
 
         public WindowAnimesVM(MainVM mainVM)

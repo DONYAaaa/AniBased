@@ -31,6 +31,19 @@ namespace AniBased.Model.BLL.Service
             }
         }
 
+        public async Task<List<Anime>> GetAllAnime()
+        {
+            try 
+            {
+                var animesEntities = await _animeRepository.GetAllAsync();
+                return animesEntities?.ToListBLL();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task CreateAnime(Anime anime)
         {
             try

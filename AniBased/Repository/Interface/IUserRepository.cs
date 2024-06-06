@@ -9,7 +9,7 @@ namespace AniBased.Repository.Interface
 {
     internal interface IUserRepository
     {
-        public Task<UserDAL> GetByIdAsync(int id);
+        public Task<UserDAL> GetByNameAsync(string name);
         public Task AddAsync(UserDAL userDAL);
         public Task DeleteAsync(int id);
     }

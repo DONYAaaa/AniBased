@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AniBased.Model.BLL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace AniBased.DAL
         public DateOnly DateOfBirth { get; set; }
         public DateTime ActionDate { get; set; }
         public string Mail { get; set; }
+        public Library Library { get; set; }
     }
 }

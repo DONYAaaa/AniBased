@@ -10,6 +10,13 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using AniBased.View.Resource;
+using AniBased.Model.BLL.Service;
+using AniBased.Repository.Interface;
+using AniBased.Repository;
+using AniBased.Model.BLL.Entities;
+using AniBased.ViewModel.Home;
+using AniBased.Model;
+using System.Collections.ObjectModel;
 
 namespace AniBased.ViewModel
 {
@@ -18,6 +25,8 @@ namespace AniBased.ViewModel
         #region ПОЛЯ
 
         private readonly MainVM _mainVM;
+
+        private string connectionString = "Host=localhost;Username=ed;Password=22041977;Database=AniBASED";
 
         #endregion
 
@@ -61,16 +70,44 @@ namespace AniBased.ViewModel
 
         public ICommand Entry
         {
-            get => new RelayCommand((param) => OnEntry(param),
-                                    (_) => CanEntry());
+            get => new AsyncRelayCommand(OnEntry, CanEntry);
         }
 
-        private async void OnEntry(object parameter)
+        private async Task OnEntry()
+        {
+            IUserRepository userRepository = new UserRepository(connectionString);
+            UserService userService = new UserService(userRepository);
+            _mainVM.User = null;
+            _mainVM.User = (userService.GetUserByName(Name).Result);
+
+            if(_mainVM.User != null)
+            {
+                await GetAllPosters();
+                await Run();
+            }
+        }
+
+        public async Task GetAllPosters()
+        {
+            ObservableCollection<PosterRow> posters= new ObservableCollection<PosterRow>();
+
+            IAnimeRepository animeRepository = new AnimeRepository(connectionString);
+            AnimeService animeService = new AnimeService(animeRepository);
+            List<Anime> animes = animeService.GetAllAnime().Result;
+            foreach (var item in animes)
+            {
+                PosterVM posterVM = new PosterVM(item);
+                posters.Add(new PosterRow(posterVM));
+            }
+            _mainVM.WindowAnimesVM.Posters = posters;
+        }
+
+        private async Task Run()
         {
             _mainVM.StartVM = _mainVM.HomeVM;
             _mainVM.SetStartLocation();
             _mainVM.HomeVM.MakeFullScreen();
-            await _mainVM.PagesAnimeVM.InitializeComponent();
+            _mainVM.PagesAnimeVM.InitializeComponent();
         }
 
         private bool CanEntry()

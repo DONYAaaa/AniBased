@@ -18,11 +18,11 @@ namespace AniBased.Model.BLL.Service
             _userRepository = userRepository;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserByName(string name)
         {
             try
             {
-                var userEntities = await _userRepository.GetByIdAsync(id);
+                var userEntities = await _userRepository.GetByNameAsync(name);
                 return userEntities?.ToBLL();
             }
             catch (Exception)

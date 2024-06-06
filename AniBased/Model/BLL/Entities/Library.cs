@@ -18,6 +18,7 @@ namespace AniBased.Model.BLL.Entities
 
         public Library()
         {
+            Anime = new List<PageOfAnime>();
         }
     }
 }

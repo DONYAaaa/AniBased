@@ -1,6 +1,10 @@
 ﻿using AniBased.DAL;
+using AniBased.Mapper;
+using AniBased.Model.BLL.Entities;
 using AniBased.Repository.Interface;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,36 +48,71 @@ namespace AniBased.Repository
             }
         }
 
-        public async Task<UserDAL> GetByIdAsync(int id)
+        public async Task<UserDAL> GetByNameAsync(string name)
         {
-            UserDAL userDAL = null;
-
-            using (var connection = new NpgsqlConnection(_connectionString))
+            try
             {
-                await connection.OpenAsync();
-                var command = new NpgsqlCommand("SELECT * FROM Users WHERE Id = @Id", connection);
-                command.Parameters.AddWithValue("@Id", id);
+                UserDAL userDAL = null;
+                IPageRepository pageRepository = new PageRepository(_connectionString);
 
-                using (var reader = await command.ExecuteReaderAsync())
+                using (var connection = new NpgsqlConnection(_connectionString))
                 {
-                    if (await reader.ReadAsync())
+                    connection.Open();
+                    var command = new NpgsqlCommand("SELECT * FROM Users WHERE Nickname = @name", connection);
+                    if (name == null)
                     {
-                        userDAL = new UserDAL();
-                        userDAL.Id = (int)reader["Id"];
-                        userDAL.Nickname = (string)reader["Nickname"];
-                        userDAL.PasswordHash = (string)reader["password_hash"];
-                        userDAL.DateOfBirth = (DateOnly)reader["dateOfBirth"];
-                        userDAL.Mail = (string)reader["mail"];
+                        command.Parameters.AddWithValue("@name", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@name", name);
+                    }
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            userDAL = new UserDAL();
+                            userDAL.Id = (int)reader["Id"];
+                            userDAL.Nickname = (string)reader["Nickname"];
+                            userDAL.PasswordHash = (string)reader["password_hash"];
+                            DateTime dateTime = (DateTime)reader["dateOfBirth"];
+                            userDAL.DateOfBirth = new DateOnly(dateTime.Year, dateTime.Month, dateTime.Day); 
+                            userDAL.Mail = (string)reader["mail"];
+                        }
+                    }
+
+                    command = new NpgsqlCommand("SELECT * FROM get_pages_by_id(@id_argument)", connection);
+                    command.Parameters.AddWithValue("@id_argument", userDAL.Id);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        Library library = new();
+                        while (await reader.ReadAsync())
+                        {
+                            int IdOfPages = (int)reader["Id"];
+                            PageOfAnimeDAL page = await pageRepository.GetByIdAsync(IdOfPages);
+                            PageOfAnime pageBLL = page.ToBLL();
+                            library.Anime.Add(pageBLL);
+                        }
+                        userDAL.Library = library;
                     }
                 }
+
+                if (userDAL == null)
+                {
+                    return userDAL;
+                }
+
+                return userDAL;
             }
 
-            if (userDAL == null)
+            catch(Exception ex)
             {
-                throw new Exception("Не удалось найти пользователя по такому Id");
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
             }
 
-            return userDAL;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AniBased.ViewModel.Base;
+﻿using AniBased.Model.BLL.Entities;
+using AniBased.ViewModel.Base;
 using AniBased.ViewModel.Home;
 using AniBased.ViewModel.Profile;
 using DocumentFormat.OpenXml.Drawing.Charts;
@@ -23,6 +24,9 @@ namespace AniBased.ViewModel
 
         private double _y;
         public double Y { get => _y; set => Set(ref _y, value); }
+
+        private User _user;
+        public User User { get => _user; set => Set(ref _user, value); }
 
 
         private BaseVM _startVM;

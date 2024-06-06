@@ -24,13 +24,6 @@ namespace AniBased
         public MainWindow()
         {
             InitializeComponent();
-            Generate();
-        }
-
-        private async Task Generate()
-        {
-            GeneratorDB generatorDB = new();
-            await generatorDB.Generate();
         }
     }
 }

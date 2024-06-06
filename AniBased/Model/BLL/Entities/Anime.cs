@@ -90,7 +90,10 @@ namespace AniBased.Model.BLL.Entities
 
                     public virtual FinalAnimeBuilder AddGenre(Genre Genre)
                     {
-                        anime.Genres.Add(Genre);
+                        if (Genre != null)
+                        {
+                            anime.Genres.Add(Genre);
+                        }
                         return this;
                     }
                     public virtual FinalAnimeBuilder AddGenres(List<Genre> Genre)
