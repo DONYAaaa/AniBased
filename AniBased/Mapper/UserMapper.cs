@@ -12,12 +12,14 @@ namespace AniBased.Mapper
     {
         public static User ToBLL(this UserDAL entity) 
         {
-            return User.Builder.AddId(entity.Id)
+            User user = User.Builder.AddId(entity.Id)
                                .AddName(entity.Nickname)
                                .AddEmail(entity.Mail)
                                .AddPassword(entity.PasswordHash)
                                .AddDateOfBirth(entity.DateOfBirth)
                                .Build();
+            user.Library = entity.Library;
+            return user;
         }
 
         public static UserDAL ToDAL(this User entity) 

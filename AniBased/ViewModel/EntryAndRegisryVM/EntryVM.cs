@@ -80,9 +80,10 @@ namespace AniBased.ViewModel
             _mainVM.User = null;
             _mainVM.User = (userService.GetUserByName(Name).Result);
 
-            if(_mainVM.User != null)
+            if (_mainVM.User != null)
             {
                 await GetAllPosters();
+                RunNewsBlock();
                 await Run();
             }
         }
@@ -94,6 +95,7 @@ namespace AniBased.ViewModel
             IAnimeRepository animeRepository = new AnimeRepository(connectionString);
             AnimeService animeService = new AnimeService(animeRepository);
             List<Anime> animes = animeService.GetAllAnime().Result;
+
             foreach (var item in animes)
             {
                 PosterVM posterVM = new PosterVM(item);
@@ -102,12 +104,25 @@ namespace AniBased.ViewModel
             _mainVM.WindowAnimesVM.Posters = posters;
         }
 
+        public async Task RunNewsBlock()
+        {
+            IAnimeRepository animeRepository = new AnimeRepository(connectionString);
+            AnimeService animeService = new AnimeService(animeRepository);
+            List<Anime> animes = animeService.GetAllAnime().Result;
+
+            await _mainVM.NewsBlockVM.GetAllYearOfRealese(animes);
+            await _mainVM.NewsBlockVM.GetAllStudiosName(animes);
+            await _mainVM.NewsBlockVM.GetAllNumberOfEpisodes(animes);
+            await _mainVM.NewsBlockVM.GetAllGenres(animes);
+            await _mainVM.UserProfileVM.Refresh();
+            await _mainVM.PagesAnimeVM.InitializeComponent();
+        }
+
         private async Task Run()
         {
             _mainVM.StartVM = _mainVM.HomeVM;
             _mainVM.SetStartLocation();
             _mainVM.HomeVM.MakeFullScreen();
-            _mainVM.PagesAnimeVM.InitializeComponent();
         }
 
         private bool CanEntry()

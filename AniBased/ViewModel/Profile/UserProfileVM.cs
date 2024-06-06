@@ -32,7 +32,14 @@ namespace AniBased.ViewModel.Profile
         #endregion
 
         #region МЕТОДЫ
-
+            
+        public async Task Refresh()
+        {
+            _nickName = _mainVM.User.Name;
+            _dateOfBirth = _mainVM.User.DateOfBirth;
+            _mail = _mainVM.User.Email;
+        }
+            
         #endregion
 
         public UserProfileVM(MainVM mainVM)

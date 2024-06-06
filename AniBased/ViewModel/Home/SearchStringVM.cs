@@ -1,4 +1,6 @@
 ﻿using AniBased.Infastructure.Command;
+using AniBased.Model.Strategy;
+using AniBased.Model.Strategy.Base;
 using AniBased.ViewModel.Base;
 using System;
 using System.Collections.Generic;
@@ -39,17 +41,19 @@ namespace AniBased.ViewModel.Home
 
         public ICommand SortCommand
         {
-            get => new AsyncRelayCommand(OnSortCommand, CanSortCommand);
+            get => new RelayCommand((_) => OnSortCommand(), 
+                                    (_) => CanSortCommand());
         }
 
         private async Task OnSortCommand()
         {
-            _mainVM.StartVM = _mainVM.HomeVM;
+            await _mainVM.NewsBlockVM.SoringForGenre();
         }
 
         private bool CanSortCommand()
         {
-            return true;
+            if (_mainVM.NewsBlockVM.GenresOfFilter.Count>0) return true;
+            else return false;
         }
 
         #endregion

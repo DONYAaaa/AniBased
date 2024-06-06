@@ -47,25 +47,19 @@ namespace AniBased.ViewModel.Profile
         #region МЕТОДЫ
         public async Task InitializeComponent()
         {
-            await Task.Delay(10000);
             await RunInitialize();
         }
 
         private async Task RunInitialize()
         {
-
-            
-            for (int i = 0; i < 10; i++)
+            if (_mainVM.User.Library.Anime.Count > 0)
             {
-                PosterVM posterVM = new PosterVM(_mainVM);
-                posterVM.NameOfAnime = "1";
-                posterVM.YearOfRelease = "2";
-                posterVM.Genres = "3";
-                posterVM.Country = "4";
-                posterVM.Studio = "5";
-                Posters.Add(new PosterRow(posterVM));
+                foreach (var item in _mainVM.User.Library.Anime[0].Animes)
+                {
+                    _posters.Add(new PosterRow(new PosterVM(item)));
+                }
+                WindowFavorites.Posters = _posters;
             }
-            WindowFavorites.Posters = Posters;
         }
         #endregion
 

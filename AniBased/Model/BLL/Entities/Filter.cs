@@ -37,6 +37,13 @@ namespace AniBased.Model.BLL.Entities
                 return this;
             }
 
+
+            public FilterBuilder AddGenres(List<Genre> genres)
+            {
+                filter.Genres = filter.Genres.Concat(genres).ToList();
+                return this;
+            }
+
             public FilterBuilder AddNumberOfEpisode(int numberOfEpisode)
             {
                 filter.NumberOfEpisodes = numberOfEpisode;

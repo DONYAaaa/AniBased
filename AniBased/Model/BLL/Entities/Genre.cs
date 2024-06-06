@@ -18,5 +18,10 @@ namespace AniBased.Model.BLL.Entities
             Name = name;
             Description = description;
         }
+
+        public Genre(string name)
+        {
+            Name = name;
+        }
     }
 }

@@ -33,7 +33,7 @@
                         VerticalAlignment="Center"
                         Grid.Column="2"
                         BorderThickness="0"
-                        Command="{Binding}">
+                        Command="{Binding SortCommand}">
                     <fa:ImageAwesome Icon="Solid_Filter" HorizontalAlignment="Center"
                                      VerticalAlignment="Center" PrimaryColor="#778DA9" Margin="10"/>
                 </Button>
